@@ -8,9 +8,18 @@ function apiCall(path) {
     });
 }
 
-export function fetchPopular(page = 1, language, type = 'movie') {
+//movieList = popular, now_playing, latest, top_rated, upcoming
+export function fetchList(page = 1, movieList = 'popular', language = 'en-US', type = 'movie') {
     return new Promise((resolve, reject) => {
-        apiCall(`${type}/popular?api_key=${api_key}&language=${language}&page=${page}`)
+        apiCall(`${type}/${movieList}?api_key=${api_key}&language=${language}&page=${page}`)
+            .then(data => resolve(data))
+            .catch(err => reject(err))
+    });
+}
+
+export function fetchSimilarList(page = 1, id, language = 'en-US', type = 'movie') {
+    return new Promise((resolve, reject) => {
+        apiCall(`${type}/${id}/similar?api_key=${api_key}&language=${language}&page=${page}`)
             .then(data => resolve(data))
             .catch(err => reject(err))
     });
