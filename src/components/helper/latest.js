@@ -21,7 +21,7 @@ export default function Latest({type}){
     }
 
     return (
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row overflow-auto">
         {latestList}
         </div>
     );

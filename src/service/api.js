@@ -3,7 +3,7 @@ const api_key = '0de978b80925eb0e40210d8773fb3375';
 function apiCall(path) {
     return new Promise((resolve, reject) => {
         fetch(`https://api.themoviedb.org/3/${path}`)
-            .then(data => resolve(data))
+            .then(data => resolve(data.json()))
             .catch(err => reject(err))
     });
 }

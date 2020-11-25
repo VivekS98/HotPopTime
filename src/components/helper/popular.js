@@ -8,7 +8,7 @@ export default function Popular({type}){
     useEffect(() => {
         fetchList(type, 'popular').then(data => {
             setPopular(data.results);
-            console.log(data);
+            console.log(data.results);
         })
                 .catch(err => console.log(err))
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,7 +21,7 @@ export default function Popular({type}){
     }
 
     return (
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row overflow-auto">
         {popularList}
         </div>
     );

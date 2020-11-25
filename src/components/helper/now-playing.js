@@ -21,7 +21,7 @@ export default function NowPlaying({type}){
     }
 
     return (
-        <div className="d-flex flex-row">
+        <div className="d-flex flex-row overflow-auto">
         {nowPlayingList}
         </div>
     );
