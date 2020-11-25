@@ -9,7 +9,7 @@ function apiCall(path) {
 }
 
 //movieList = popular, now_playing, latest, top_rated, upcoming
-export function fetchList(page = 1, movieList = 'popular', language = 'en-US', type = 'movie') {
+export function fetchList(type = 'movie', movieList = 'popular', language = 'en-US', page = 1) {
     return new Promise((resolve, reject) => {
         apiCall(`${type}/${movieList}?api_key=${api_key}&language=${language}&page=${page}`)
             .then(data => resolve(data))
@@ -17,7 +17,7 @@ export function fetchList(page = 1, movieList = 'popular', language = 'en-US', t
     });
 }
 
-export function fetchSimilarList(page = 1, id, language = 'en-US', type = 'movie') {
+export function fetchSimilarList(type = 'movie', page = 1, id, language = 'en-US') {
     return new Promise((resolve, reject) => {
         apiCall(`${type}/${id}/similar?api_key=${api_key}&language=${language}&page=${page}`)
             .then(data => resolve(data))

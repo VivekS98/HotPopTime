@@ -1,12 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+
 .App {
-  color: white;
-  min-height: 100%;
-  min-width: 100%;
-  background-color: #180055;
+  height: 100%;
+  width: 100%;
+  background-color: #130F2D;
 }
 
 .App-header {
+  height: 100px;
   display: flex;
+  padding: 10px;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+}
+
+.logo {
+  color: gold;
+  font-size: 50px;
+  font-family: 'Modak', cursive;
+  cursor: default;
+}
+
+.search {
+  margin: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .App-header {
+    height: 70px;
+
+  }
+  .logo {
+    font-size: xx-large;
+  }
 }
