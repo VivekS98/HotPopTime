@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default (movie) => {
+export default function MovieCard(movie){
     return (
-        <div class="card" style="width: 18rem;">
+        <div class="card" style={{width: '18rem'}}>
         <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} class="card-img-top" alt="poster" />
         <div class="card-body">
         <h5 class="card-title">{movie.title}</h5>
