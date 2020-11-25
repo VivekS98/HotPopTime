@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import Home from './components/home';
-import Search from './components/search';
 import './styling/App.css';
 
 function App() {
   const [type, setType] = useState('movie');
   const [typeView, setTypeView] = useState('Movies');
-  const [search, setSearch] = useState(false);
 
   const HandleShow = (useShow) => {
     switch (useShow) {
@@ -18,6 +16,9 @@ function App() {
         setTypeView('TV');
         setType(useShow);
         break;
+      default:
+        setTypeView('Movies');
+        setType('movie');
     }
   }
 
@@ -36,11 +37,7 @@ function App() {
           </div>
       </header>
       
-      {
-        search ?
-        <Search /> :
-        <Home type={type} />
-      }
+      <Home type={type} />
 
     </div>
   );

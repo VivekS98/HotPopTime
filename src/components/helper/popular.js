@@ -8,7 +8,7 @@ export default function Popular({type}){
     useEffect(() => {
         fetchList(type, 'popular').then(data => {
             setPopular(data.results);
-            console.log(data.results);
+            console.log(data);
         })
                 .catch(err => console.log(err))
         // eslint-disable-next-line react-hooks/exhaustive-deps
