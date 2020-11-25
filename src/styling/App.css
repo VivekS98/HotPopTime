@@ -27,6 +27,36 @@
   margin: 10px;
 }
 
+.movie-list {
+  display: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.movie-card {
+  width: 200px;
+  height: auto;
+}
+
+.movie-card:hover {
+  background-color: #6D6792;
+  animation: color-delay .3s ease-in;
+}
+
+.movie-poster {
+  width: 200px;
+  height: 250px;
+}
+
+@keyframes color-delay {
+  0% {
+    background-color: #130F2D;
+  }
+  100% {
+    background-color: #6D6792;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .App-header {
     height: 70px;

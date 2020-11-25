@@ -1,44 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Home from './components/home';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 import './styling/App.css';
 
 function App() {
-  const [type, setType] = useState('movie');
-  const [typeView, setTypeView] = useState('Movies');
-
-  const HandleShow = (useShow) => {
-    switch (useShow) {
-      case 'movie':
-        setTypeView('Movies');
-        setType(useShow);
-        break;
-      case 'tv':
-        setTypeView('TV');
-        setType(useShow);
-        break;
-      default:
-        setTypeView('Movies');
-        setType('movie');
-    }
-  }
-
   return (
     <div className="App">
-      <header className="App-header navbar navbar-expand-lg">
-        <span className="logo">HOTPOPTIME</span>
-        <div className="dropdown px-2">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {typeView}
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <p className="dropdown-item" onClick={() => HandleShow('movie')} >Movies</p>
-              <p className="dropdown-item" onClick={() => HandleShow('tv')}>TV</p>
-            </div>
-          </div>
-      </header>
-      
-      <Home type={type} />
-
+      <BrowserRouter>
+      <Redirect exact from='/' to='/movies' />
+        <Route path="/tv">
+          <Home type='tv' />
+        </Route>
+        <Route exact path="/movies">
+          <Home type='movie' />
+        </Route>
+      </BrowserRouter>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { fetchList } from '../../service/api';
 
 export default function TopRated({type}){
     const [topRated, setTopRated] = useState(null);
-    let topRatedList = "loading...";
+    let topRatedList = null;
     useEffect(() => {
         fetchList(type, 'top_rated').then(data => {
             setTopRated(data.results);
@@ -21,8 +21,11 @@ export default function TopRated({type}){
     }
 
     return (
-        <div className="d-flex flex-row overflow-auto">
-        {topRatedList}
-        </div>
+        <React.Fragment>
+            <h2 className="text-white ml-3">Top Rated</h2>
+            <div className="movie-list d-flex flex-row overflow-auto">
+            {topRatedList}
+            </div>
+        </React.Fragment>
     );
 }

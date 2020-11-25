@@ -4,10 +4,10 @@ import { fetchList } from '../../service/api';
 
 export default function Latest({type}){
     const [latest, setLatest] = useState(null);
-    let latestList = "loading...";
+    let latestList = null;
     useEffect(() => {
         fetchList(type, 'latest').then(data => {
-            setLatest(data.results);
+            setLatest([data]);
             console.log(data);
         })
                               .catch(err => console.log(err))
@@ -21,8 +21,11 @@ export default function Latest({type}){
     }
 
     return (
-        <div className="d-flex flex-row overflow-auto">
-        {latestList}
-        </div>
+        <React.Fragment>
+            <h2 className="text-white ml-3">Latest</h2>
+            <div className="movie-list d-flex flex-row overflow-auto">
+            {latestList}
+            </div>
+        </React.Fragment>
     );
 }

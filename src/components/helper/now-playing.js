@@ -4,7 +4,7 @@ import { fetchList } from '../../service/api';
 
 export default function NowPlaying({type}){
     const [nowPlaying, setNowPlaying] = useState(null);
-    let nowPlayingList = "loading...";
+    let nowPlayingList = null;
     useEffect(() => {
         fetchList(type, 'now_playing').then(data => {
             setNowPlaying(data.results);
@@ -21,8 +21,11 @@ export default function NowPlaying({type}){
     }
 
     return (
-        <div className="d-flex flex-row overflow-auto">
-        {nowPlayingList}
-        </div>
+        <React.Fragment>
+            <h2 className="text-white ml-3">Now Playing</h2>
+            <div className="movie-list d-flex flex-row overflow-auto">
+            {nowPlayingList}
+            </div>
+        </React.Fragment>
     );
 }

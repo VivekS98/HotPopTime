@@ -4,7 +4,7 @@ import { fetchList } from '../../service/api';
 
 export default function Popular({type}){
     const [popular, setPopular] = useState(null);
-    let popularList = "loading...";
+    let popularList = null;
     useEffect(() => {
         fetchList(type, 'popular').then(data => {
             setPopular(data.results);
@@ -21,8 +21,11 @@ export default function Popular({type}){
     }
 
     return (
-        <div className="d-flex flex-row overflow-auto">
-        {popularList}
-        </div>
+        <React.Fragment>
+            <h2 className="text-white ml-3">Popular</h2>
+            <div className="movie-list d-flex flex-row overflow-auto">
+            {popularList}
+            </div>
+        </React.Fragment>
     );
 }

@@ -4,13 +4,14 @@ import { fetchList } from '../../service/api';
 
 export default function Upcoming({type}){
     const [upcoming, setUpcoming] = useState(null);
-    let upcomingList = "loading...";
+    let upcomingList = null;
     useEffect(() => {
-        fetchList(type, 'upcoming').then(data => {
+        fetchList(type, 'upcoming')
+            .then(data => {
             setUpcoming(data.results);
             console.log(data);
         })
-                              .catch(err => console.log(err))
+            .catch(err => console.log(err))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -21,8 +22,11 @@ export default function Upcoming({type}){
     }
 
     return (
-        <div className="d-flex flex-row overflow-auto">
-        {upcomingList}
-        </div>
+        <React.Fragment>
+            <h2 className="text-white ml-3">Upcoming</h2>
+            <div className="movie-list d-flex flex-row overflow-auto">
+            {upcomingList}
+            </div>
+        </React.Fragment>
     );
 }
