@@ -43,7 +43,7 @@ function Home({ type }) {
                 <React.Fragment>
                     <Popular type={type}/>
                     <TopRated type={type}/>
-                    <UpComing type={type}/>
+                    <Latest type={type}/>
                 </React.Fragment>
             );
         }
