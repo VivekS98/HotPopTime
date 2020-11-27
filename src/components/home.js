@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Latest from './helper/latest';
 import NowPlaying from './helper/now-playing';
 import Popular from './helper/popular';
 import TopRated from './helper/top-rated';
 import UpComing from './helper/upcoming';
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import '../styling/App.css';
 
-function Home({ type }) {
-    const [typeView, setTypeView] = useState('Movies');
+function Home() {
     const history = useHistory();
+    const { type } = useParams();
 
-    const HandleShow = (useShow) => {
+    console.log(type);
+
+    const handleShow = (useShow) => {
         switch (useShow) {
         case 'movie':
-            setTypeView('Movies');
-            history.push('movies');
+            history.push('movie');
             break;
         case 'tv':
-            setTypeView('TV');
             history.push('tv');
             break;
         default:
-            setTypeView('Movies');
-            history.push('movies');
+            history.push('movie');
         }
     }
 
@@ -31,19 +30,19 @@ function Home({ type }) {
         if(type === 'movie') {
             return (
                 <React.Fragment>
-                    <Popular type={type}/>
-                    <NowPlaying type={type}/>
-                    <TopRated type={type}/>
-                    <UpComing type={type}/>
-                    <Latest type={type}/>
+                    <Popular propType='row'/>
+                    <NowPlaying propType='row'/>
+                    <TopRated propType='row'/>
+                    <UpComing propType='row'/>
+                    <Latest />
                 </React.Fragment>
             );
         } else {
             return (
                 <React.Fragment>
-                    <Popular type={type}/>
-                    <TopRated type={type}/>
-                    <Latest type={type}/>
+                    <TopRated propType='row'/>
+                    <Popular propType='row'/>
+                    <Latest />
                 </React.Fragment>
             );
         }
@@ -55,11 +54,11 @@ function Home({ type }) {
                 <span className="logo">HOTPOPTIME</span>
                 <div className="dropdown px-2">
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {typeView}
+                    {type === 'movie' ? 'Movies' : 'TV'}
                     </button>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <p className="dropdown-item" onClick={() => HandleShow('movie')} >Movies</p>
-                    <p className="dropdown-item" onClick={() => HandleShow('tv')}>TV</p>
+                    <p className="dropdown-item" onClick={() => handleShow('movie')} >Movies</p>
+                    <p className="dropdown-item" onClick={() => handleShow('tv')}>TV</p>
                     </div>
                 </div>
             </header>

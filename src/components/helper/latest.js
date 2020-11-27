@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import MovieCard from '../movie-card';
 import { fetchList } from '../../service/api';
+import { useParams } from 'react-router-dom';
 
-export default function Latest({type}){
+export default function Latest(){
     const [latest, setLatest] = useState(null);
+    const { type } = useParams();
     let latestList = null;
     useEffect(() => {
         fetchList(type, 'latest').then(data => {

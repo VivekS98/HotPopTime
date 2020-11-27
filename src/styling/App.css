@@ -39,13 +39,25 @@
 }
 
 .movie-card:hover {
-  background-color: #6D6792;
-  animation: color-delay .3s ease-in;
+  background-color: #BDBAC9;
+  animation: color-delay .35s ease-in;
 }
 
 .movie-poster {
   width: 200px;
   height: 250px;
+  opacity: 100%;
+}
+
+.movie-poster-details {
+  margin: 20px;
+  border: #130F2D solid 5px;
+  height: 500px;
+  width: auto;
+}
+
+.movie title {
+  padding: 50px;
 }
 
 @keyframes color-delay {
@@ -53,7 +65,7 @@
     background-color: #130F2D;
   }
   100% {
-    background-color: #6D6792;
+    background-color: #BDBAC9;
   }
 }
 
