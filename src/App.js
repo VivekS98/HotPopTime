@@ -12,7 +12,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Redirect exact from='/' to='/movie' />
         <Route exact path="/:type">
           <Home />
         </Route>
@@ -31,6 +30,7 @@ function App() {
         <Route exact path="/:type/:id">
           <MovieShow />
         </Route>
+      <Redirect exact from='/' to='/movie' />
       </BrowserRouter>
     </div>
   );

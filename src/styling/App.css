@@ -48,16 +48,35 @@
   height: 250px;
   opacity: 100%;
 }
-
 .movie-poster-details {
   margin: 20px;
-  border: #130F2D solid 5px;
   height: 500px;
   width: auto;
 }
 
+.movie-details {
+  filter: brightness(100%);
+}
+
+.movie-info {
+  opacity: 100%;
+  filter: brightness(100%)
+}
+
+.movie-backdrop {
+  width: 100%;
+  height: auto;
+  opacity: 25%;
+  position: fixed;
+}
+
+.movie-overview {
+  margin: 20px;
+  filter: brightness(100%)
+}
+
 .movie title {
-  padding: 50px;
+  margin: 200px;
 }
 
 @keyframes color-delay {
@@ -76,5 +95,9 @@
   }
   .logo {
     font-size: xx-large;
+  }
+  .movie-poster-details {
+    height: 250px;
+    width: auto;
   }
 }
