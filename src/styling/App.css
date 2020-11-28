@@ -41,6 +41,7 @@
 .movie-card {
   width: 200px;
   height: auto;
+  cursor: default;
 }
 
 .movie-card:hover {

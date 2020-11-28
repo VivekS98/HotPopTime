@@ -56,7 +56,7 @@ function Home() {
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {type === 'movie' ? 'Movies' : 'TV'}
                     </button>
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div className="dropdown-menu" style={{cursor: 'default'}} aria-labelledby="dropdownMenuButton">
                     <p className="dropdown-item" onClick={() => handleShow('movie')} >Movies</p>
                     <p className="dropdown-item" onClick={() => handleShow('tv')}>TV</p>
                     </div>
