@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchDetails } from '../service/api';
-
+import '../styling/App.css';
 
 export default function MovieShow() {
     const [data, setData] = useState(null);
@@ -28,8 +28,8 @@ export default function MovieShow() {
                         <div className="d-flex flex-column">
                             <h2 className="text-light">{data.title ? data.title : data.name}</h2>
                             <h5 className="text-white-50">{data.release_date ? data.release_date : data.first_air_date}</h5>
-                            <h4 className="text-light">Genres</h4>
                             <div className="d-flex flex-row flex-wrap">
+                            <h4 className="text-light">Genres:</h4>
                             {genresView}
                             </div>
                         </div>
