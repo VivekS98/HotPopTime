@@ -25,7 +25,7 @@ export function fetchList(type = 'movie', movieList = 'popular', language = 'en-
     });
 }
 
-export function fetchSimilarList(type = 'movie', page = 1, id, language = 'en-US') {
+export function fetchSimilarList(type = 'movie', id, language = 'en-US', page = 1) {
     return new Promise((resolve, reject) => {
         apiCall(`${type}/${id}/similar?api_key=${api_key}&language=${language}&page=${page}`)
             .then(data => resolve(data))

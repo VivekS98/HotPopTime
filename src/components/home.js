@@ -40,8 +40,8 @@ function Home() {
         } else {
             return (
                 <React.Fragment>
-                    <TopRated propType='row'/>
                     <Popular propType='row'/>
+                    <TopRated propType='row'/>
                     <Latest />
                 </React.Fragment>
             );
