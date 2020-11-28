@@ -30,8 +30,8 @@ function Home() {
         if(type === 'movie') {
             return (
                 <React.Fragment>
-                    <Popular propType='row'/>
                     <NowPlaying propType='row'/>
+                    <Popular propType='row'/>
                     <TopRated propType='row'/>
                     <UpComing propType='row'/>
                     <Latest />
