@@ -59,14 +59,14 @@
 }
 
 .movie-info {
-  opacity: 100%;
+  opacity: 1;
   filter: brightness(100%)
 }
 
 .movie-backdrop {
   width: 100%;
   height: auto;
-  opacity: 25%;
+  opacity: .25;
   position: fixed;
 }
 
