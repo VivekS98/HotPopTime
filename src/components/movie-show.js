@@ -3,6 +3,26 @@ import { useParams } from 'react-router-dom';
 import { fetchDetails } from '../service/api';
 import '../styling/App.css';
 
+function Production({ data }) {
+    let arrayShow = data.map((item, ind) => {
+        return (
+            <div key={ind} className="movie-card">
+                <img src={`https://image.tmdb.org/t/p/w300${item.logo_path}`} className="movie-poster" alt="logo" />
+                <div className="card-body">
+                    <h5 className="text-white">{item.name}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{item.origin_country}</h6>
+                </div>
+            </div>
+        );
+    });
+
+    return (
+        <div className="movie-list d-flex flex-row overflow-auto">
+            {arrayShow}
+        </div>
+    );
+}
+
 export default function MovieShow() {
     const [data, setData] = useState(null);
     const { type, id } = useParams();
@@ -32,6 +52,10 @@ export default function MovieShow() {
                                 <h5 className="movie-title text-white-50">{data.release_date ? data.release_date : data.first_air_date}</h5>
                             </div>
                             <div className="d-flex flex-row flex-wrap">
+                                <h4 className="text-white">Adult:</h4>
+                                <h6 className="text-white-50 movie-title">{data.adult ? 'True' : 'False'}</h6>
+                            </div>
+                            <div className="d-flex flex-row flex-wrap">
                                 <h4 className="text-white">Genres:</h4>
                                 {genresView}
                             </div>
@@ -42,8 +66,12 @@ export default function MovieShow() {
                         </div>
                     </div>
                     <div className="movie-overview">
-                        <h3 className="text-light">Overview:</h3>
+                        <h3 className="text-white">Overview:</h3>
                         <p className="movie-title text-white">{data.overview}</p>
+                    </div>
+                    <div className="movie-overview">
+                        <h3 className="text-white">Production:</h3>
+                        <Production data={data.production_companies} />
                     </div>
                 </div>
             );
