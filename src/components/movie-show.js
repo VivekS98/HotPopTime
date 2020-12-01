@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieCard from './movie-card';
+import styled from 'styled-components';
 import { fetchDetails, fetchSimilarList } from '../service/api';
 import '../styling/App.css';
 
@@ -29,17 +30,24 @@ export default function MovieShow() {
     const [similar, setSimilar] = useState(null);
     const { type, id } = useParams();
 
-    useEffect((prevProps) => {
+    useEffect(() => {
         fetchDetails(type, id).then(data => setData(data))
                               .catch(err => console.log(err));
-            fetchSimilarList(type, id).then(data => setSimilar(data))
-                                  .catch(err => console.log(err));
+        fetchSimilarList(type, id).then(data => setSimilar(data))
+                                .catch(err => console.log(err));
+        window.scrollTo(0,0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
     const showDetails = () => {
         if(data && similar) {
             let genres = [...data.genres];
             let similars = [...similar.results];
+
+            const FixedDiv = styled.div`
+                background: url(https://image.tmdb.org/t/p/original${data.backdrop_path}) top no-repeat fixed;
+                background-size: cover;
+            `;
+
             let genresView = genres.map((item, ind) => {
                 return (
                     <h6 className="text-white-50" key={ind} style={{margin: '10px'}}>{item.name}</h6>
@@ -51,10 +59,10 @@ export default function MovieShow() {
                 );
             });
             return (
-                <div className="movie-details w-100 h-100">
-                    <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className="movie-backdrop" alt="backdrop" />
+                <FixedDiv>
+                    <div className="movie-details w-100 h-100">
                     <div className="movie-info d-flex flex-row">
-                        <img src={`https://image.tmdb.org/t/p/original${data.poster_path}`} className="movie-poster-details" alt="poster" />
+                        <img src={`https://image.tmdb.org/t/p/w300${data.poster_path}`} className="movie-poster-details" alt="poster" />
                         <div className="d-flex flex-column justify-content-around">
                             <div className="d-flex flex-column">
                                 <h3 className="text-light">{data.title ? data.title : data.name}</h3>
@@ -89,7 +97,8 @@ export default function MovieShow() {
                         {similarView}
                         </div>
                     </div>
-                </div>
+                    </div>
+                </FixedDiv>
             );
         }
     }
