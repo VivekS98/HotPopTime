@@ -1,10 +1,9 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import '../styling/App.css';
 
-export default function MovieCard({movie}){
+export default function MovieCard({type, movie}){
     const history = useHistory();
-    const { type } = useParams();
 
     const handleClick = () => {
         history.push(`/${type}/${movie.id}`);

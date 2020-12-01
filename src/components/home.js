@@ -1,9 +1,6 @@
 import React from 'react';
 import Latest from './helper/latest';
-import NowPlaying from './helper/now-playing';
 import Popular from './helper/popular';
-import TopRated from './helper/top-rated';
-import UpComing from './helper/upcoming';
 import { useHistory, useParams } from 'react-router-dom'
 import '../styling/App.css';
 
@@ -30,18 +27,18 @@ function Home() {
         if(type === 'movie') {
             return (
                 <React.Fragment>
-                    <NowPlaying propType='row'/>
-                    <Popular propType='row'/>
-                    <TopRated propType='row'/>
-                    <UpComing propType='row'/>
+                    <Popular fetchType="now_playing" propType='row'/>
+                    <Popular fetchType="popular" propType='row'/>
+                    <Popular fetchType="top_rated" propType='row'/>
+                    <Popular fetchType="upcoming" propType='row'/>
                     <Latest />
                 </React.Fragment>
             );
         } else {
             return (
                 <React.Fragment>
-                    <Popular propType='row'/>
-                    <TopRated propType='row'/>
+                    <Popular fetchType="popular" propType='row'/>
+                    <Popular fetchType="top_rated" propType='row'/>
                     <Latest />
                 </React.Fragment>
             );

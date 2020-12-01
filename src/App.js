@@ -1,9 +1,6 @@
 import React from 'react';
 import Home from './components/home';
-import TopRated from './components/helper/top-rated';
 import Popular from './components/helper/popular';
-import NowPLaying from './components/helper/now-playing';
-import Upcoming from './components/helper/upcoming';
 import MovieShow from './components/movie-show';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 import './styling/App.css';
@@ -18,19 +15,19 @@ function App() {
         <Route exact path="/:type">
           <Home />
         </Route>
-        <Route exact path="/:type/top_rated">
-          <TopRated propType='full' />
+        <Route path="/:type/top_rated">
+          <Popular fetchType="top_rated" propType='full' />
         </Route>
-        <Route exact path="/:type/popular">
-          <Popular propType='full' />
+        <Route path="/:type/popular">
+          <Popular fetchType="popular" propType='full' />
         </Route>
-        <Route exact path="/:type/now_playing">
-          <NowPLaying propType='full' />
+        <Route path="/:type/now_playing">
+          <Popular fetchType="now_playing" propType='full' />
         </Route>
-        <Route exact path="/:type/upcoming">
-          <Upcoming propType='full' />
+        <Route path="/:type/upcoming">
+          <Popular fetchType="upcoming" propType='full' />
         </Route>
-        <Route exact path="/:type/:id">
+        <Route path="/:type/:id">
           <MovieShow />
         </Route>
       </BrowserRouter>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieCard from './movie-card';
-import styled from 'styled-components';
 import { fetchDetails, fetchSimilarList } from '../service/api';
 import '../styling/App.css';
 
@@ -43,11 +42,6 @@ export default function MovieShow() {
             let genres = [...data.genres];
             let similars = [...similar.results];
 
-            const FixedDiv = styled.div`
-                background: url(https://image.tmdb.org/t/p/original${data.backdrop_path}) top no-repeat fixed;
-                background-size: cover;
-            `;
-
             let genresView = genres.map((item, ind) => {
                 return (
                     <h6 className="text-white-50" key={ind} style={{margin: '10px'}}>{item.name}</h6>
@@ -59,7 +53,10 @@ export default function MovieShow() {
                 );
             });
             return (
-                <FixedDiv>
+                <div style={{
+                    background: `url(https://image.tmdb.org/t/p/original${data.backdrop_path}) top no-repeat fixed`,
+                    backgroundSize: 'cover'
+                }}>
                     <div className="movie-details w-100 h-100">
                         <div className="movie-info d-flex flex-row">
                             <img src={`https://image.tmdb.org/t/p/w300${data.poster_path}`} className="movie-poster-details" alt="poster" />
@@ -98,7 +95,7 @@ export default function MovieShow() {
                             </div>
                         </div>
                     </div>
-                </FixedDiv>
+                </div>
             );
         }
     }
