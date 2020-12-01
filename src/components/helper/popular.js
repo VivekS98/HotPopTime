@@ -70,7 +70,7 @@ export default function Popular({ propType, fetchType }){
             return (
                 <React.Fragment>
                     <h2 className="text-white ml-3">Popular</h2>
-                    <div className="movie-title d-flex flex-row flex-wrap">
+                    <div className="movie-title d-flex flex-row flex-wrap justify-content-center align-items-center">
                         {list}
                         <div 
                           className="movie-card text-center text-secondary" 

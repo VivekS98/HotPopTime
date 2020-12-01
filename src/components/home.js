@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React from 'react';
 import Latest from './helper/latest';
 import Popular from './helper/popular';
 import { useHistory, useParams } from 'react-router-dom'
@@ -29,28 +29,24 @@ function Movies() {
 function Home() {
     const history = useHistory();
     const { type } = useParams();
-    const [path, setPath] = useState(type);
 
     console.log(type);
 
     const handleShow = (useShow) => {
         switch (useShow) {
         case 'movie':
-            setPath(useShow);
             history.push(useShow);
             break;
         case 'tv':
-            setPath(useShow);
             history.push(useShow);
             break;
         default:
-            setPath('movie');
             history.push('movie');
         }
     }
 
     const showContent = () => {
-        if(path === 'movie') {
+        if(type === 'movie') {
             return (
                 <Movies />
             );
