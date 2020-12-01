@@ -101,6 +101,9 @@
   .logo {
     font-size: xx-large;
   }
+  .movie-card {
+    width: 150px;
+  }
   .movie-poster-details {
     margin: 10px;
     height: 250px;
