@@ -1,46 +1,62 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import Latest from './helper/latest';
 import Popular from './helper/popular';
 import { useHistory, useParams } from 'react-router-dom'
 import '../styling/App.css';
 
+function TV() {
+    return (
+        <React.Fragment>
+            <Popular fetchType="popular" propType='row'/>
+            <Popular fetchType="top_rated" propType='row'/>
+            <Latest />
+        </React.Fragment>
+    );
+}
+
+function Movies() {
+    return (
+        <React.Fragment>
+            <Popular fetchType="now_playing" propType='row'/>
+            <Popular fetchType="popular" propType='row'/>
+            <Popular fetchType="top_rated" propType='row'/>
+            <Popular fetchType="upcoming" propType='row'/>
+            <Latest />
+        </React.Fragment>
+    );
+}
+
 function Home() {
     const history = useHistory();
     const { type } = useParams();
+    const [path, setPath] = useState(type);
 
     console.log(type);
 
     const handleShow = (useShow) => {
         switch (useShow) {
         case 'movie':
-            history.push('movie');
+            setPath(useShow);
+            history.push(useShow);
             break;
         case 'tv':
-            history.push('tv');
+            setPath(useShow);
+            history.push(useShow);
             break;
         default:
+            setPath('movie');
             history.push('movie');
         }
     }
 
     const showContent = () => {
-        if(type === 'movie') {
+        if(path === 'movie') {
             return (
-                <React.Fragment>
-                    <Popular fetchType="now_playing" propType='row'/>
-                    <Popular fetchType="popular" propType='row'/>
-                    <Popular fetchType="top_rated" propType='row'/>
-                    <Popular fetchType="upcoming" propType='row'/>
-                    <Latest />
-                </React.Fragment>
+                <Movies />
             );
         } else {
             return (
-                <React.Fragment>
-                    <Popular fetchType="popular" propType='row'/>
-                    <Popular fetchType="top_rated" propType='row'/>
-                    <Latest />
-                </React.Fragment>
+                <TV />
             );
         }
     }

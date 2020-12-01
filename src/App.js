@@ -27,7 +27,7 @@ function App() {
         <Route path="/:type/upcoming">
           <Popular fetchType="upcoming" propType='full' />
         </Route>
-        <Route path="/:type/:id">
+        <Route exact path="/:type/:id">
           <MovieShow />
         </Route>
       </BrowserRouter>

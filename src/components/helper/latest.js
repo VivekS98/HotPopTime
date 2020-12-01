@@ -18,7 +18,7 @@ export default function Latest(){
 
     if(latest) {
         latestList = latest.map((val, ind) => {
-            return <MovieCard key={ind} movie={val} />
+            return <MovieCard key={ind} type={type} movie={val} />
         });
     }
 

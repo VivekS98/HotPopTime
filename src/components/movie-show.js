@@ -38,7 +38,7 @@ export default function MovieShow() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
     const showDetails = () => {
-        if(data && similar) {
+        try {
             let genres = [...data.genres];
             let similars = [...similar.results];
 
@@ -49,7 +49,7 @@ export default function MovieShow() {
             });
             let similarView = similars.map((item, ind) => {
                 return (
-                    <MovieCard key={ind} movie={item} />
+                    <MovieCard key={ind} type={type} movie={item} />
                 );
             });
             return (
@@ -97,6 +97,9 @@ export default function MovieShow() {
                     </div>
                 </div>
             );
+        } catch(err) {
+            console.log(err);
+            return null;
         }
     }
 
