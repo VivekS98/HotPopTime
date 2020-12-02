@@ -5,8 +5,8 @@ import '../styling/App.css';
 export default function Search() {
     const [type, setType] = useState('movie');
     const [queryString, setQueryString] = useState('');
-    const [language, setLanguage] = useState(null);
-    const [year, setYear] = useState(null);
+    const [language, setLanguage] = useState('en-US');
+    const [year, setYear] = useState('');
     const history = useHistory();
     
     const handleSubmit = (e) => {
@@ -18,6 +18,7 @@ export default function Search() {
 
     return (
         <form className='search d-flex flex-column justify-content-center align-items-center' onSubmit={(e) => handleSubmit(e)}>
+            <h2 className="text-white">Search Anything</h2>
             <div className="form-group input-group mb-3">
                 <input 
                   type="text" 
@@ -41,7 +42,7 @@ export default function Search() {
                 </div>
                 <div className="dropdown px-2">
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {language === 'English' ? 'Movies' : 'Other'}
+                    {language === 'en-US' ? 'English' : 'Other'}
                     </button>
                     <div className="dropdown-menu" style={{cursor: 'default'}} aria-labelledby="dropdownMenuButton">
                     <p className="dropdown-item" onClick={() => setLanguage('en-US')} >English</p>

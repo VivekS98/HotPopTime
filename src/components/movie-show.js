@@ -56,7 +56,10 @@ export default function MovieShow() {
             });
             return (
                 <div style={{
-                    background: `url(https://image.tmdb.org/t/p/original${data.backdrop_path}) center no-repeat fixed`,
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${data.backdrop_path})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                    backgroundPosition: 'center',
                     backgroundSize: 'cover'
                 }}>
                     <div className="movie-details w-100 h-100">
@@ -69,8 +72,12 @@ export default function MovieShow() {
                                     <h5 className="movie-title text-white-50">{data.release_date ? data.release_date : data.first_air_date}</h5>
                                 </div>
                                 <div className="d-flex flex-row flex-wrap">
+                                    <h4 className="text-white">Rating:</h4>
+                                    <h5 className="text-white-50">{data.vote_average}</h5>
+                                </div>
+                                <div className="d-flex flex-row flex-wrap align-items-center">
                                     <h4 className="text-white">Adult:</h4>
-                                    <h6 className="text-white-50 movie-title">{data.adult ? 'True' : 'False'}</h6>
+                                    <h5 className="text-white-50">{data.adult ? 'True' : 'False'}</h5>
                                 </div>
                                 <div className="d-flex flex-row flex-wrap">
                                     <h4 className="text-white">Language:</h4>
