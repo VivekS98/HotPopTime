@@ -85,7 +85,13 @@
 }
 
 .movie-title {
-  margin: 5px 15px;
+  margin: 5px 5px;
+  padding: 5px 10px;
+  border-radius: 10%;
+}
+
+.search {
+  margin: 5%;
 }
 
 @keyframes color-delay {

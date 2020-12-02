@@ -25,12 +25,12 @@ function Production({ data }) {
 }
 
 export default function MovieShow() {
-    const [data, setData] = useState(null);
-    const [similar, setSimilar] = useState(null);
+    const [data, setData] = useState([]);
+    const [similar, setSimilar] = useState([]);
     const { type, id } = useParams();
 
     useEffect(() => {
-        fetchDetails(type, id).then(data => setData(data))
+        fetchDetails(type, id).then(data => {setData(data); console.log(data);})
                               .catch(err => console.log(err));
         fetchSimilarList(type, id).then(data => setSimilar(data))
                                 .catch(err => console.log(err));
@@ -39,22 +39,24 @@ export default function MovieShow() {
     }, [id]);
     const showDetails = () => {
         try {
-            let genres = [...data.genres];
-            let similars = [...similar.results];
-
-            let genresView = genres.map((item, ind) => {
+            let genresView = [...data.genres].map((item, ind) => {
                 return (
                     <h6 className="text-white-50" key={ind} style={{margin: '10px'}}>{item.name}</h6>
                 );
             });
-            let similarView = similars.map((item, ind) => {
+            let languages = [...data.spoken_languages].map((item, ind) => {
+                return (
+                    <h6 key={ind} className="text-white-50 movie-title">{item.english_name}</h6>
+                );
+            });
+            let similarView = [...similar.results].map((item, ind) => {
                 return (
                     <MovieCard key={ind} type={type} movie={item} />
                 );
             });
             return (
                 <div style={{
-                    background: `url(https://image.tmdb.org/t/p/original${data.backdrop_path}) top no-repeat fixed`,
+                    background: `url(https://image.tmdb.org/t/p/original${data.backdrop_path}) center no-repeat fixed`,
                     backgroundSize: 'cover'
                 }}>
                     <div className="movie-details w-100 h-100">
@@ -72,7 +74,7 @@ export default function MovieShow() {
                                 </div>
                                 <div className="d-flex flex-row flex-wrap">
                                     <h4 className="text-white">Language:</h4>
-                                    <h6 className="text-white-50 movie-title">{data.spoken_languages[0] ? data.spoken_languages[0].english_name : 'unknown'}</h6>
+                                    {languages}
                                 </div>
                             </div>
                         </div>

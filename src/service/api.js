@@ -33,7 +33,7 @@ export function fetchSimilarList(type = 'movie', id, language = 'en-US', page = 
     });
 }
 
-export function searchQuery(page = 1, language, string, year, type = 'movie') {
+export function searchQuery(type = 'movie', string, language = 'en-US', year, page = 1) {
     let searchURL = `search/${type}?api_key=${api_key}&query=${string}&page=${page}&include_adult=true`;
     if(language) {
         searchURL = searchURL.concat(`&language=${language}`);

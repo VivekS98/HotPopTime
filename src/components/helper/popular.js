@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MovieCard from '../movie-card';
 import { useHistory, useParams} from 'react-router-dom';
-import { fetchList } from '../../service/api';
+import { fetchList, searchQuery } from '../../service/api';
 
 export default function Popular({ propType, fetchType }){
     const [popular, setPopular] = useState([]);
@@ -9,7 +9,7 @@ export default function Popular({ propType, fetchType }){
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
     const history = useHistory();
-    const { type } = useParams();
+    const { type, string, language, year } = useParams();
 
     let list = null;
 
@@ -18,28 +18,35 @@ export default function Popular({ propType, fetchType }){
     }
 
     useEffect(() => {
-        fetchList(type, fetchType, 'en-US', page).then(data => {
-            setPopular([...popular, ...data.results]);
-            setTotalPages(data.total_pages);
-            switch(fetchType){
-                case 'popular':
-                    setFetchType('Popular');
-                    break;
-                case 'now_playing':
-                    setFetchType('Now Playing');
-                    break;
-                case 'top_rated':
-                    setFetchType('Top Rated');
-                    break;
-                case 'upcoming':
-                    setFetchType('Upcoming');
-                    break;
-                default:
-                    setFetchType(null);
-            }
-            console.log(data);
-        })
-                .catch(err => console.log(err))
+        if(fetchType === 'search') {
+            searchQuery(type, string, language, year, page ).then(data => {
+                setPopular([...popular, ...data.results]);
+                setTotalPages(data.total_pages);
+                setFetchType('Results');
+            })
+        } else {
+            fetchList(type, fetchType, 'en-US', page).then(data => {
+                setPopular([...popular, ...data.results]);
+                setTotalPages(data.total_pages);
+                switch(fetchType){
+                    case 'popular':
+                        setFetchType('Popular');
+                        break;
+                    case 'now_playing':
+                        setFetchType('Now Playing');
+                        break;
+                    case 'top_rated':
+                        setFetchType('Top Rated');
+                        break;
+                    case 'upcoming':
+                        setFetchType('Upcoming');
+                        break;
+                    default:
+                        setFetchType(null);
+                }
+                console.log(data);
+            }).catch(err => console.log(err))
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
@@ -69,7 +76,7 @@ export default function Popular({ propType, fetchType }){
         } else if(propType === 'full') {
             return (
                 <React.Fragment>
-                    <h2 className="text-white ml-3">Popular</h2>
+                    <h2 className="text-white ml-3">{fetcher}</h2>
                     <div className="movie-title d-flex flex-row flex-wrap justify-content-center">
                         {list}
                         <div 

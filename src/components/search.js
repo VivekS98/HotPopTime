@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../styling/App.css';
 
 export default function Search() {
+    const [type, setType] = useState('movie');
+    const [queryString, setQueryString] = useState('');
+    const [language, setLanguage] = useState(null);
+    const [year, setYear] = useState(null);
+    const history = useHistory();
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        history.push(`/search/${type}/${queryString}/${language}/${year}`);
+    }
+
     return (
-        <div className='search'>
-            <div className="input-group mb-3">
-                <input type="text" className="form-control" placeholder="Search Movies" aria-label="Search Movies" aria-describedby="button-addon2" />
+        <form className='search' onSubmit={(e) => handleSubmit(e)}>
+            <div className="form-group input-group mb-3">
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="Search Movies" 
+                  aria-label="Search Movies" 
+                  value={queryString}
+                  aria-describedby="button-addon2" 
+                  onChange={(e) => setQueryString(e.target.value)}
+                />
                 <div className="input-group-append">
-                    <button className="btn btn-outline-secondary" type="button" id="button-addon2">
+                    <button className="btn btn-outline-secondary" type="submit" id="button-addon2">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                         <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
@@ -15,7 +35,9 @@ export default function Search() {
                     </button>
                 </div>
             </div>
-        </div>
+            <div className="form-group d-flex flex-row">
 
+            </div>
+        </form>
     );
 }

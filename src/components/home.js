@@ -1,6 +1,7 @@
 import React from 'react';
 import Latest from './helper/latest';
 import Popular from './helper/popular';
+import Search from './search';
 import { useHistory, useParams } from 'react-router-dom'
 import '../styling/App.css';
 
@@ -74,6 +75,7 @@ function Home() {
             <div className="d-flex flex-column">
                 {showContent()} 
             </div>
+            <Search />
         </React.Fragment>
     );
 }

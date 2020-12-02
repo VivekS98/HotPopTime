@@ -2,13 +2,14 @@ import React from 'react';
 import Home from './components/home';
 import Popular from './components/helper/popular';
 import MovieShow from './components/movie-show';
-import {BrowserRouter, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import './styling/App.css';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <Switch>
         <Route exact path='/'>
           <Redirect to="/movie" />
         </Route>
@@ -27,9 +28,13 @@ function App() {
         <Route path="/:type/upcoming">
           <Popular fetchType="upcoming" propType='full' />
         </Route>
+        <Route path="/search/:type/:string/:language/:year">
+          <Popular fetchType="search" propType='full' />
+        </Route>
         <Route exact path="/:type/:id">
           <MovieShow />
         </Route>
+      </Switch>
       </BrowserRouter>
     </div>
   );
