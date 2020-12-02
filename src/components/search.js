@@ -29,7 +29,7 @@ export default function Search() {
                   onChange={(e) => setQueryString(e.target.value)}
                 />
             </div>
-            <div className="search-params input-group form-group d-flex flex-row">
+            <div className="input-group form-group d-flex flex-row">
                 <div className="dropdown px-2">
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {type === 'movie' ? 'Movies' : 'TV'}
