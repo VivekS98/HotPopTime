@@ -123,7 +123,6 @@ export default function MovieShow() {
                 </div>
             );
         } catch(err) {
-            console.log(err);
             return null;
         }
     }
