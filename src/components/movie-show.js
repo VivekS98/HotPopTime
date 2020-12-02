@@ -106,17 +106,13 @@ export default function MovieShow() {
                             <h2 className="text-white ml-3">Similar</h2>
                             <div className="movie-list d-flex flex-row overflow-auto">
                             {similarView}
-                            {
-                                similar.length > 0 ?
-                                <div 
-                                className="movie-card text-center text-secondary" 
-                                style={{padding: '150px 100px'}} 
-                                onClick={() => handleClick()}
-                                >
-                                    <b>More</b>
-                                </div> :
-                                null
-                            }
+                            <div 
+                            className="movie-card text-center text-secondary" 
+                            style={{padding: '150px 100px'}} 
+                            onClick={() => handleClick()}
+                            >
+                                <b>More</b>
+                            </div>
                             </div>
                         </div>
                     </div>

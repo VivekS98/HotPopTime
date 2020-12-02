@@ -87,17 +87,13 @@ export default function Popular({ propType, fetchType }){
                     <h2 className="text-white ml-3">{fetcher}</h2>
                     <div className="movie-title d-flex flex-row flex-wrap justify-content-center">
                         {list}
-                        {
-                            totalPages > 1 ?
-                            <div 
-                          className="movie-card text-center text-secondary" 
-                          style={{padding: '150px 100px'}} 
-                          onClick={page === totalPages ? null : () => handleFetchNewPage(page+1)}
+                        <div 
+                        className="movie-card text-center text-secondary" 
+                        style={{padding: '150px 100px'}} 
+                        onClick={page === totalPages ? null : () => handleFetchNewPage(page+1)}
                         >
                             <b>More</b>
-                        </div> :
-                        null
-                        }
+                        </div>
                     </div>
                 </React.Fragment>
             );
