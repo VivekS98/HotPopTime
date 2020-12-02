@@ -94,6 +94,10 @@
   margin: 5%;
 }
 
+.search-params {
+  width: 350px;
+}
+
 @keyframes color-delay {
   0% {
     background-color: #130F2D;
