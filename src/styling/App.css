@@ -107,6 +107,12 @@
   .movie-title {
     margin: 5px 5px;
   }
+  .movie-card {
+    width: 150px;
+  }
+  .movie-poster {
+    width: 150px ;
+  }
   .movie-poster-details {
     margin: 10px;
     height: 250px;
