@@ -6,18 +6,17 @@ export default function Search() {
     const [type, setType] = useState('movie');
     const [queryString, setQueryString] = useState('');
     const [language, setLanguage] = useState('en-US');
-    const [year, setYear] = useState('');
     const history = useHistory();
     
     const handleSubmit = (e) => {
         e.preventDefault();
         if(queryString.length > 0) {
-            history.push(`/search/${type}/${queryString}/${language}/${year}`);
+            history.push(`/search/${type}/${queryString}/${language}`);
         }
     }
 
     return (
-        <form className='search d-flex flex-column justify-content-center align-items-center' onSubmit={(e) => handleSubmit(e)}>
+        <form className='search d-flex flex-column align-items-center' onSubmit={(e) => handleSubmit(e)}>
             <h2 className="text-white">Search Anything</h2>
             <div className="form-group input-group mb-3">
                 <input 
@@ -49,15 +48,6 @@ export default function Search() {
                     <p className="dropdown-item" onClick={() => setLanguage(null)}>Other</p>
                     </div>
                 </div>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  placeholder="Year" 
-                  aria-label="Year" 
-                  value={year}
-                  aria-describedby="button-addon2" 
-                  onChange={(e) => setYear(e.target.value)}
-                />
             </div>
             <div className="input-group-append">
                 <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>

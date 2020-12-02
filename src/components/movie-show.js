@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import MovieCard from './movie-card';
 import { fetchDetails, fetchSimilarList } from '../service/api';
 import '../styling/App.css';
@@ -28,6 +28,11 @@ export default function MovieShow() {
     const [data, setData] = useState([]);
     const [similar, setSimilar] = useState([]);
     const { type, id } = useParams();
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push(`/similar/${type}/${id}`);
+    }
 
     useEffect(() => {
         fetchDetails(type, id).then(data => {setData(data); console.log(data);})
@@ -101,6 +106,13 @@ export default function MovieShow() {
                             <h2 className="text-white ml-3">Similar</h2>
                             <div className="movie-list d-flex flex-row overflow-auto">
                             {similarView}
+                            <div 
+                            className="movie-card text-center text-secondary" 
+                            style={{padding: '150px 100px'}} 
+                            onClick={() => handleClick()}
+                            >
+                                <b>More</b>
+                            </div>
                             </div>
                         </div>
                     </div>

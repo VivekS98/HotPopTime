@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MovieCard from '../movie-card';
 import { useHistory, useParams} from 'react-router-dom';
-import { fetchList, searchQuery } from '../../service/api';
+import { fetchList, searchQuery, fetchSimilarList } from '../../service/api';
 
 export default function Popular({ propType, fetchType }){
     const [popular, setPopular] = useState([]);
@@ -9,7 +9,7 @@ export default function Popular({ propType, fetchType }){
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
     const history = useHistory();
-    const { type, string, language, year } = useParams();
+    const { id, type, string, language, year } = useParams();
 
     let list = null;
 
@@ -23,7 +23,15 @@ export default function Popular({ propType, fetchType }){
                 setPopular([...popular, ...data.results]);
                 setTotalPages(data.total_pages);
                 setFetchType('Results');
-            })
+                console.log(data);
+            }).catch(err => console.log(err));
+        } else if(fetchType === 'similar') {
+            fetchSimilarList(type, id, 'en-US', page).then(data => {
+                setPopular([...popular, ...data.results]);
+                setTotalPages(data.total_pages);
+                setFetchType('Similar');
+                console.log(data);
+            }).catch(err => console.log(err));
         } else {
             fetchList(type, fetchType, 'en-US', page).then(data => {
                 setPopular([...popular, ...data.results]);
