@@ -35,11 +35,13 @@ export default function MovieShow() {
     }
 
     useEffect(() => {
-        fetchDetails(type, id).then(data => {setData(data); console.log(data);})
+        fetchDetails(type, id).then(data => {setData(data); 
+                                    console.log(data);
+                                    window.scrollTo(0,0);
+                                })
                               .catch(err => console.log(err));
         fetchSimilarList(type, id).then(data => setSimilar(data))
                                 .catch(err => console.log(err));
-        window.scrollTo(0,0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
     const showDetails = () => {
