@@ -13,10 +13,6 @@ export default function Popular({ propType, fetchType }){
 
     let list = null;
 
-    const handleFetchNewPage = (pageNos) => {
-        setPage(pageNos);
-    }
-
     useEffect(() => {
         if(fetchType === 'search') {
             searchQuery(type, string, language, year, page ).then(data => {
@@ -90,7 +86,7 @@ export default function Popular({ propType, fetchType }){
                         <div 
                         className="movie-card text-center text-secondary" 
                         style={{padding: '150px 100px'}} 
-                        onClick={page === totalPages ? null : () => handleFetchNewPage(page+1)}
+                        onClick={page === totalPages ? null : () => setPage(page+1)}
                         >
                             <b>More</b>
                         </div>

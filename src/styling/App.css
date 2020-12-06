@@ -80,14 +80,17 @@
 }
 
 .movie-overview {
-  margin: 20px;
   filter: brightness(100%)
 }
 
 .movie-title {
-  margin: 5px 5px;
-  padding: 5px 10px;
+  margin: 0 5px;
+  padding: 0 5px;
   border-radius: 10%;
+}
+
+.paras {
+  margin: 20px 10px;
 }
 
 .search {

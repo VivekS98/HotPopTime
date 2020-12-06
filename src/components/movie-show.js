@@ -46,12 +46,12 @@ export default function MovieShow() {
         try {
             let genresView = [...data.genres].map((item, ind) => {
                 return (
-                    <h6 className="text-white-50" key={ind} style={{margin: '10px'}}>{item.name}</h6>
+                    <h6 className="movie-title text-white-50" key={ind}>{item.name}</h6>
                 );
             });
             let languages = [...data.spoken_languages].map((item, ind) => {
                 return (
-                    <h6 key={ind} className="text-white-50 movie-title">{item.english_name}</h6>
+                    <h6 key={ind} className="movie-title text-white-50">{item.english_name}</h6>
                 );
             });
             let similarView = [...similar.results].map((item, ind) => {
@@ -77,41 +77,40 @@ export default function MovieShow() {
                                     <h5 className="movie-title text-white-50">{data.release_date ? data.release_date : data.first_air_date}</h5>
                                 </div>
                                 <div className="d-flex flex-row flex-wrap">
-                                    <h4 className="text-white">Rating:</h4>
-                                    <h5 className="text-white-50">{data.vote_average}</h5>
-                                </div>
-                                <div className="d-flex flex-row flex-wrap align-items-center">
-                                    <h4 className="text-white">Adult:</h4>
-                                    <h5 className="text-white-50">{data.adult ? 'True' : 'False'}</h5>
+                                    <h6 className="text-white">Rating:</h6>
+                                    <h6 className="movie-title text-white-50">{data.vote_average}</h6>
                                 </div>
                                 <div className="d-flex flex-row flex-wrap">
-                                    <h4 className="text-white">Language:</h4>
+                                    <h6 className="text-white">Adult:</h6>
+                                    <h6 className="movie-title text-white-50">{data.adult ? 'True' : 'False'}</h6>
+                                </div>
+                                <div className="d-flex flex-row flex-wrap">
+                                    <h6 className="text-white">Language:</h6>
                                     {languages}
                                 </div>
                             </div>
                         </div>
-                        <div className="movie-overview d-flex flex-row flex-wrap">
-                            <h4 className="text-white">Genres:</h4>
+                        <div className="paras movie-overview d-flex flex-row flex-wrap align-items-center">
+                            <h5 className="movie-title text-white">Genres:</h5>
                             {genresView}
                         </div>
-                        <div className="movie-overview">
-                            <h3 className="text-white">Overview:</h3>
+                        <div className="paras movie-overview">
+                            <h3 className="movie-title text-white">Overview:</h3>
                             <p className="movie-title text-justify text-white">{data.overview}</p>
                         </div>
-                        <div className="movie-overview">
-                            <h3 className="text-white">Production:</h3>
+                        <div className="paras movie-overview">
+                            <h3 className="movie-title text-white">Production:</h3>
                             <Production data={data.production_companies} />
                         </div>
                         <div className="movie-overview">
-                            <h2 className="text-white ml-3">Similar</h2>
+                            <h3 className="text-white ml-3">Similar</h3>
                             <div className="movie-list d-flex flex-row overflow-auto">
                             {similarView}
                             <div 
-                            className="movie-card text-center text-secondary" 
-                            style={{padding: '150px 100px'}} 
+                            className="movie-card text-center text-secondary d-flex flex-column justify-content-center align-items-center"
                             onClick={() => handleClick()}
                             >
-                                <b>More</b>
+                                <b style={{padding: '100px'}}>More</b>
                             </div>
                             </div>
                         </div>
