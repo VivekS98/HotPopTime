@@ -71,10 +71,9 @@ export default function MovieShow() {
                         <div className="movie-info d-flex flex-row">
                             <img src={`https://image.tmdb.org/t/p/w300${data.poster_path}`} className="movie-poster-details" alt="poster" />
                             <div className="d-flex flex-column justify-content-around">
-                                <div className="d-flex flex-column">
+                                <div className="paras d-flex flex-column">
                                     <h3 className="text-light">{data.title ? data.title : data.name}</h3>
-                                    <h6 className="movie-title text-white-50">{data.tagline}</h6>
-                                    <h5 className="movie-title text-white-50">{data.release_date ? data.release_date : data.first_air_date}</h5>
+                                    <h6 className="text-white-50">{data.tagline}</h6>
                                 </div>
                                 <div className="d-flex flex-row flex-wrap">
                                     <h6 className="text-white">Rating:</h6>
@@ -89,6 +88,10 @@ export default function MovieShow() {
                                     {languages}
                                 </div>
                             </div>
+                        </div>
+                        <div className="paras movie-overview d-flex flex-row flex-wrap align-items-center">
+                            <h5 className="movie-title text-white">Release:</h5>
+                            <h6 className="movie-title text-white-50">{data.release_date ? data.release_date : data.first_air_date}</h6>
                         </div>
                         <div className="paras movie-overview d-flex flex-row flex-wrap align-items-center">
                             <h5 className="movie-title text-white">Genres:</h5>
@@ -106,12 +109,16 @@ export default function MovieShow() {
                             <h3 className="text-white ml-3">Similar</h3>
                             <div className="movie-list d-flex flex-row overflow-auto">
                             {similarView}
-                            <div 
-                            className="movie-card text-center text-secondary d-flex flex-column justify-content-center align-items-center"
-                            onClick={() => handleClick()}
-                            >
-                                <b style={{padding: '100px'}}>More</b>
-                            </div>
+                            {
+                                similar.total_pages > 1 ? 
+                                <div 
+                                className="movie-card text-center text-secondary d-flex flex-column justify-content-center align-items-center"
+                                onClick={() => handleClick()}
+                                >
+                                    <b style={{padding: '100px'}}>More</b>
+                                </div> :
+                                null
+                            }
                             </div>
                         </div>
                     </div>

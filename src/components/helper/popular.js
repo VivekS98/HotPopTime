@@ -68,11 +68,10 @@ export default function Popular({ propType, fetchType }){
                     <div className="movie-list d-flex flex-row overflow-auto">
                         {list}
                         <div 
-                        className="movie-card text-center text-secondary" 
-                        style={{padding: '150px 100px'}} 
+                        className="movie-card text-center text-secondary d-flex flex-column justify-content-center align-items-center"
                         onClick={() => handleClick()}
                         >
-                            <b>More</b>
+                            <b style={{padding: '100px'}}>More</b>
                         </div>
                     </div>
                 </React.Fragment>
@@ -83,13 +82,16 @@ export default function Popular({ propType, fetchType }){
                     <h2 className="text-white ml-3">{fetcher}</h2>
                     <div className="movie-title d-flex flex-row flex-wrap justify-content-center">
                         {list}
-                        <div 
-                        className="movie-card text-center text-secondary" 
-                        style={{padding: '150px 100px'}} 
-                        onClick={page === totalPages ? null : () => setPage(page+1)}
-                        >
-                            <b>More</b>
-                        </div>
+                        {
+                            page !== totalPages ?
+                            <div 
+                            className="movie-card text-center text-secondary d-flex flex-column justify-content-center align-items-center"
+                            onClick={page === totalPages ? null : () => setPage(page+1)}
+                            >
+                                <b style={{padding: '100px'}}>More</b>
+                            </div> :
+                            null
+                        }
                     </div>
                 </React.Fragment>
             );
