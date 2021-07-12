@@ -1,35 +1,20 @@
 import Head from "next/head";
-const type = "";
 
 export default function Layout({ children }) {
   return (
-    <div>
+    <div className="bg-default text-white">
       <Head>
         <title>HotPopTime</title>
       </Head>
-      <header className="App-header navbar navbar-expand-lg">
-        <span className="logo">HOTPOPTIME</span>
-        <div className="dropdown px-2">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            {type === "movie" ? "Movies" : "TV"}
-          </button>
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li className="dropdown-item" onClick={() => handleShow("movie")}>
-              Movies
-            </li>
-            <li className="dropdown-item" onClick={() => handleShow("tv")}>
-              TV
-            </li>
-          </ul>
-        </div>
+      <header className="p-4 flex flex-row justify-between items-center">
+        <span className="font-modak text-4xl text-yellow-400 md:text-5xl">
+          HOTPOPTIME
+        </span>
+        <button className="px-4 py-2 rounded-md ring-2 text-lg ring-white transition duration-200 hover:bg-white hover:text-opposite active:bg-default active:text-white">
+          {"Movie"}
+        </button>
       </header>
-      {children}
+      <div className="font-default">{children}</div>
     </div>
   );
 }
