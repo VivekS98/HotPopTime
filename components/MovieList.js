@@ -3,14 +3,14 @@ import MovieCard from "./MovieCard";
 export default function MovieList({ list, genre }) {
   console.log(list);
   return (
-    <div className="flex flex-row flex-nowrap overflow-auto">
+    <div className="flex flex-row flex-nowrap overflow-auto movie-list">
       {list.map((movie, ind) => (
         <MovieCard key={`${ind}${movie?.title}`} movie={movie} />
       ))}
       <div className="group flex justify-center items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-10 w-10 m-10 transition duration-300 text-white group-hover:w-12 group-hover:h-12"
+          className="h-10 w-10 m-10 transition duration-200 text-white group-hover:transform group-hover:scale-125"
           viewBox="0 0 20 20 "
           fill="currentColor"
         >
