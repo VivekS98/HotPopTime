@@ -3,7 +3,6 @@ import { fetchList } from "../utils/api";
 
 export default function TV(props) {
   const list = JSON.parse(props.list);
-  console.log(list);
 
   return (
     <>

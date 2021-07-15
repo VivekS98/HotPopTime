@@ -4,7 +4,6 @@ import { fetchList } from "../utils/api";
 
 export default function Home(props) {
   const list = JSON.parse(props.list);
-  console.log(list);
 
   return (
     <>

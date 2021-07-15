@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function MovieCard({ movie }) {
   return (
-    <div className="group flex-grow w-1/4 md:w-80 transition duration-300">
+    <div className="group flex-grow transition duration-300">
       <div className="w-36 h-48 md:w-52 md:h-80 relative cursor-pointer">
         <Image
           className="transition-gpu duration-200 group-hover:transform group-hover:scale-110"

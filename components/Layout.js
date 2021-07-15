@@ -3,8 +3,8 @@ import Head from "next/head";
 import { useState } from "react";
 
 export default function Layout({ children }) {
-  const [state, setState] = useState("Movies");
   const router = useRouter();
+  const [state, setState] = useState(router.pathname === "/" ? "Movies" : "TV");
 
   const handleClick = () => {
     console.log(router.pathname);
