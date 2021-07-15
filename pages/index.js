@@ -8,7 +8,7 @@ export default function Home(props) {
   return (
     <>
       <Head>
-        <title>HOTPOPTIME</title>
+        <title>Movies | HOTPOPTIME</title>
         <meta name="description" content="A Place for Movie Seekers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

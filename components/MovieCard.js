@@ -13,8 +13,10 @@ export default function MovieCard({ movie }) {
           alt={movie?.title}
         />
       </div>
-      <h5 className="text-base md:text-xl">{movie?.title || movie?.name}</h5>
-      <h6 className="text-sm text-gray-300 md:text-base">
+      <h5 className="text-base ml-1 md:text-xl transition-gpu duration-200 group-hover:transform group-hover:scale-90">
+        {movie?.title || movie?.name}
+      </h5>
+      <h6 className="text-sm ml-1 text-gray-300 transition-gpu duration-200 md:text-base group-hover:transform group-hover:scale-90">
         {movie?.release_date || movie?.first_air_date}
       </h6>
     </div>
