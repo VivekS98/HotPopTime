@@ -1,8 +1,14 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, type }) {
+  const router = useRouter();
+
   return (
-    <div className="group flex-grow transition duration-300">
+    <div
+      className="group flex-grow transition duration-300"
+      onClick={() => router.push(`/info/${type}/${movie.id}`)}
+    >
       <div className="w-36 h-48 md:w-52 md:h-80 relative cursor-pointer">
         <Image
           className="transition-gpu duration-200 group-hover:transform group-hover:scale-110"

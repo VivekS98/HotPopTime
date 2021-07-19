@@ -9,29 +9,33 @@ export default function Home(props) {
     <>
       <Head>
         <title>Movies | HOTPOPTIME</title>
-        <meta name="description" content="A Place for Movie Seekers" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="Movies | HOTPOPTIME" key="title" />
+        <meta
+          name="description"
+          content="A Place for Movie Seekers"
+          key="description"
+        />
       </Head>
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Now Playing
       </h2>
-      <MovieList list={list.nowPlaying} genre="now_playing" />
+      <MovieList list={list.nowPlaying} type="movie" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Popular
       </h2>
-      <MovieList list={list.popular} genre="popular" />
+      <MovieList list={list.popular} type="movie" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Top Rated
       </h2>
-      <MovieList list={list.topRated} genre="top_rated" />
+      <MovieList list={list.topRated} type="movie" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Upcoming
       </h2>
-      <MovieList list={list.upcoming} genre="upcoming" />
+      <MovieList list={list.upcoming} type="movie" />
     </>
   );
 }

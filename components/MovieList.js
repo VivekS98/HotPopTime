@@ -1,11 +1,11 @@
 import MovieCard from "./MovieCard";
 
-export default function MovieList({ list, genre }) {
+export default function MovieList({ list, type }) {
   console.log(list);
   return (
-    <div className="flex flex-row flex-nowrap overflow-auto movie-list">
+    <div className="flex flex-row flex-nowrap bg-transparent overflow-auto movie-list">
       {list.map((movie, ind) => (
-        <MovieCard key={`${ind}${movie?.title}`} movie={movie} />
+        <MovieCard key={`${ind}${movie?.title}`} movie={movie} type={type} />
       ))}
       <div className="group flex justify-center items-center">
         <svg

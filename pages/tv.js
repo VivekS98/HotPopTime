@@ -8,19 +8,23 @@ export default function TV(props) {
   return (
     <>
       <Head>
-        <title>TV | HOTPOPTIME</title>
-        <meta name="description" content="A Place for Movie Seekers" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Movies | HOTPOPTIME</title>
+        <meta property="og:title" content="TV | HOTPOPTIME" key="title" />
+        <meta
+          name="description"
+          content="A Place for Show Seekers"
+          key="description"
+        />
       </Head>
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Popular
       </h2>
-      <MovieList list={list.popular} genre="popular" />
+      <MovieList list={list.popular} type="tv" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Top Rated
       </h2>
-      <MovieList list={list.topRated} genre="top_rated" />
+      <MovieList list={list.topRated} type="tv" />
     </>
   );
 }

@@ -1,10 +1,22 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const [state, setState] = useState(router.pathname === "/" ? "Movies" : "TV");
+
+  const determinePath = () => {
+    switch (router.pathname) {
+      case "/":
+        return "Movies";
+      case "/tv":
+        return "TV";
+      default:
+        return "Movies";
+    }
+  };
+
+  const [state, setState] = useState(() => determinePath());
 
   const handleClick = () => {
     console.log(router.pathname);
@@ -18,7 +30,7 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className="bg-default text-white cursor-default">
+    <div className={`bg-default text-white cursor-default min-h-screen`}>
       <Head>
         <title>HotPopTime</title>
       </Head>
@@ -26,12 +38,14 @@ export default function Layout({ children }) {
         <span className="font-modak text-4xl text-[gold] md:text-5xl">
           HOTPOPTIME
         </span>
-        <button
-          onClick={() => handleClick()}
-          className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
-        >
-          {state}
-        </button>
+        {state !== "" && (
+          <button
+            onClick={() => handleClick()}
+            className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
+          >
+            {state}
+          </button>
+        )}
       </header>
       <div className="font-default">{children}</div>
     </div>
