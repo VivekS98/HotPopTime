@@ -19,6 +19,16 @@ export function fetchDetails(type = "movie", id, language = "en-US") {
   });
 }
 
+export function fetchListByCompany(id) {
+  return new Promise((resolve, reject) => {
+    apiCall(
+      `https://api.themoviedb.org/3/discover/movie?api_key=0de978b80925eb0e40210d8773fb3375&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_companies=${id}&with_watch_monetization_types=flatrate`
+    )
+      .then((data) => resolve(data))
+      .catch((err) => reject(err));
+  });
+}
+
 //movieList = popular, now_playing, latest, top_rated, upcoming
 export function fetchList(
   type = "movie",

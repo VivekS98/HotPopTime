@@ -2,10 +2,53 @@ import { fetchDetails, fetchSimilarList } from "../../utils/api";
 import MovieList from "../../components/MovieList";
 import Image from "next/image";
 import Head from "next/head";
+import { useState } from "react";
+import { useRouter } from "next/router";
+
+function Production({ data }) {
+  let arrayShow = data.map((item, ind) => {
+    return (
+      <div key={ind} className="group m-3 w-40">
+        <Image
+          className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:opacity-100"
+          src={`https://image.tmdb.org/t/p/w300${item.logo_path}`}
+          height="100"
+          width="150"
+          alt={data.title}
+        />
+        <h5 className="text-lg">{item.name}</h5>
+        <h6 className="text-gray-300 text-lg">{item.origin_country}</h6>
+      </div>
+    );
+  });
+
+  return <div className="flex flex-row overflow-auto">{arrayShow}</div>;
+}
 
 export default function Show(props) {
+  const router = useRouter();
+  const determinePath = () => {
+    switch (props.params[0]) {
+      case "movie":
+        return "Movies";
+      case "tv":
+        return "TV";
+      default:
+        return "Movies";
+    }
+  };
   const data = JSON.parse(props.details);
   const similar = JSON.parse(props.similar);
+  const [state, setState] = useState(() => determinePath());
+  console.log(data);
+
+  const handleClick = () => {
+    if (state === "Movies") {
+      router.push("/");
+    } else {
+      router.push("/tv");
+    }
+  };
 
   let genresView = [...data.genres].map((item, ind) => {
     return (
@@ -35,13 +78,27 @@ export default function Show(props) {
         backgroundSize: "cover",
       }}
     >
-      <Head></Head>
+      <Head>
+        <title>{data.title}</title>
+        <meta property="og:title" content={data.title} key="title" />
+        <meta name="description" content={data.overview} key="description" />
+      </Head>
       <div className="bg-default bg-opacity-50 min-h-screen p-2 md:p-5">
-        <div className="mx-5 lg:mx-[200px]">
+        <header className=" flex flex-row justify-between items-center">
+          <span className="font-modak text-4xl text-[gold] md:text-5xl">
+            HOTPOPTIME
+          </span>
+          <button
+            onClick={() => handleClick()}
+            className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
+          >
+            {state}
+          </button>
+        </header>
+        <div className="m-5 lg:mx-[200px]">
           <div className="flex flex-row flex-wrap pb-5 flec-nowrap justify-between sm:flex-nowrap">
             <div className="w-36 h-48 md:w-60 md:h-96 lg:w-[330px] lg:h-[500px] relative">
               <Image
-                className="transition-gpu duration-200"
                 src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
                 layout="fill"
                 objectFit="cover"
@@ -85,6 +142,10 @@ export default function Show(props) {
           <div className="my-3 md:my-5">
             <h3 className="text-xl font-semibold md:text-2xl">Overview:</h3>
             <p className="text-gray-300 text-lg">{data.overview}</p>
+          </div>
+          <div className="my-3 md:my-5">
+            <h3 className="text-xl font-semibold md:text-2xl">Production:</h3>
+            <Production data={data.production_companies} />
           </div>
           <h2 className="text-xl mb-3 font-semibold md:text-2xl">Similar:</h2>
         </div>
