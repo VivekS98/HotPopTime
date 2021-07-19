@@ -6,18 +6,7 @@ export default function Layout({ children }) {
   const [header, setHeader] = useState("flex");
   const router = useRouter();
 
-  const determinePath = () => {
-    switch (router.pathname) {
-      case "/":
-        return "Movies";
-      case "/tv":
-        return "TV";
-      default:
-        return "Movies";
-    }
-  };
-
-  const [state, setState] = useState(() => determinePath());
+  const [state, setState] = useState("Movies");
 
   const handleClick = () => {
     console.log(router.pathname);
@@ -31,10 +20,21 @@ export default function Layout({ children }) {
   };
 
   useEffect(() => {
-    if (router.pathname.includes("/info")) {
-      setHeader("hidden");
-    } else {
-      setHeader("flex");
+    switch (router.pathname) {
+      case "/":
+        return "Movies";
+      case "/tv":
+        return "TV";
+      default:
+        if (router.pathname.includes("/info")) {
+          if (router.pathname.includes("/movie")) {
+            setState("Movies");
+          } else setState("TV");
+          setHeader("hidden");
+        } else {
+          setHeader("flex");
+        }
+        return "Movies";
     }
   }, [router.pathname]);
 

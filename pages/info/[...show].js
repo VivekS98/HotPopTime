@@ -9,13 +9,15 @@ function Production({ data }) {
   let arrayShow = data.map((item, ind) => {
     return (
       <div key={ind} className="group m-3 w-40">
-        <Image
-          className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:opacity-100"
-          src={`https://image.tmdb.org/t/p/w300${item.logo_path}`}
-          height="100"
-          width="150"
-          alt={data.title}
-        />
+        <div className="group w-[150px] h-[80px] md:w-[200px] md:h-[100px] relative">
+          <Image
+            className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:bg-opacity-100"
+            src={`https://image.tmdb.org/t/p/w300${item.logo_path}`}
+            layout="fill"
+            alt={data.title}
+          />
+        </div>
+
         <h5 className="text-lg">{item.name}</h5>
         <h6 className="text-gray-300 text-lg">{item.origin_country}</h6>
       </div>
@@ -96,7 +98,7 @@ export default function Show(props) {
           </button>
         </header>
         <div className="m-5 lg:mx-[200px]">
-          <div className="flex flex-row flex-wrap pb-5 flec-nowrap justify-between sm:flex-nowrap">
+          <div className="flex flex-row flex-nowrap pb-5 flec-nowrap justify-between">
             <div className="w-36 h-48 md:w-60 md:h-96 lg:w-[330px] lg:h-[500px] relative">
               <Image
                 src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
@@ -106,13 +108,15 @@ export default function Show(props) {
                 alt={data.title}
               />
             </div>
-            <div className="flex flex-col justify-around items-start">
-              <h1 className="text-lg font-semibold sm:text-2xl md:text-4xl">
-                {data.title ? data.title : data.name}
-              </h1>
-              <h3 className="text-lg text-gray-300 sm:text-xl">
-                {data.tagline}
-              </h3>
+            <div className="flex flex-col justify-around ml-2 items-start">
+              <div>
+                <h1 className="text-lg font-semibold sm:text-2xl md:text-4xl">
+                  {data.title ? data.title : data.name}
+                </h1>
+                <h3 className="text-lg hidden text-gray-300 sm:text-xl md:flex">
+                  {data.tagline}
+                </h3>
+              </div>
               <h3 className="text-lg font-semibold sm:text-xl">
                 Release:
                 <span className="text-gray-300 ml-2 font-medium">
@@ -125,7 +129,7 @@ export default function Show(props) {
                   {data.vote_average}
                 </span>
               </h3>
-              <h3 className="flex flex-row flex-wrap text-lg font-semibold sm:text-xl">
+              <h3 className="flex-row flex-wrap hidden text-lg font-semibold sm:text-xl md:flex">
                 Languages:
                 <span className="flex flex-row flex-wrap text-gray-300 ml-2 font-medium">
                   {languages}
@@ -133,7 +137,19 @@ export default function Show(props) {
               </h3>
             </div>
           </div>
-          <h3 className="flex flex-row flex-wrap text-lg font-semibold sm:text-xl">
+          <h3 className="text-lg font-semibold md:hidden">
+            Tagline:
+            <span className="text-gray-300 font-normal ml-2 text-lg sm:text-xl">
+              {data.tagline}
+            </span>
+          </h3>
+          <h3 className="flex flex-row flex-wrap text-lg font-semibold sm:text-xl md:hidden">
+            Languages:
+            <span className="flex flex-row flex-wrap text-gray-300 font-medium">
+              {languages}
+            </span>
+          </h3>
+          <h3 className="flex flex-row text-lg font-semibold sm:text-xl">
             Genres:
             <span className="flex flex-row flex-wrap text-gray-300 ml-2 font-medium">
               {genresView}
