@@ -1,42 +1,18 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ShowContext } from "../utils/api";
 
 export default function Layout({ children }) {
   const [header, setHeader] = useState("flex");
+  const { show, setShow } = useContext(ShowContext);
   const router = useRouter();
-
-  const [state, setState] = useState("Movies");
-
-  const handleClick = () => {
-    console.log(router.pathname);
-    if (state === "Movies") {
-      setState("TV");
-      router.push("/tv");
-    } else {
-      setState("Movies");
-      router.push("/");
-    }
-  };
 
   useEffect(() => {
     if (router.pathname.includes("/info")) {
-      if (router.pathname.includes("/movie")) {
-        setState("Movies");
-      } else if (router.pathname.includes("/tv")) {
-        setState("TV");
-      }
       setHeader("hidden");
     } else {
       setHeader("flex");
-      switch (router.pathname) {
-        case "/":
-          return "Movies";
-        case "/tv":
-          return "TV";
-        default:
-          return "Movies";
-      }
     }
   }, [router.pathname]);
 
@@ -52,10 +28,10 @@ export default function Layout({ children }) {
           HOTPOPTIME
         </span>
         <button
-          onClick={() => handleClick()}
+          onClick={() => setShow()}
           className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
         >
-          {state}
+          {show}
         </button>
       </header>
       <div className="font-default">{children}</div>

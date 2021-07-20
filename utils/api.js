@@ -1,4 +1,10 @@
 import axios from "axios";
+import { createContext } from "react";
+
+export const ShowContext = createContext({
+  show: "Movies",
+  setCurrentShow: () => {},
+});
 
 const api_key = "0de978b80925eb0e40210d8773fb3375";
 

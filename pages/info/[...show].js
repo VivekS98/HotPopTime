@@ -1,14 +1,14 @@
-import { fetchDetails, fetchSimilarList } from "../../utils/api";
+import { fetchDetails, fetchSimilarList, ShowContext } from "../../utils/api";
 import MovieList from "../../components/MovieList";
 import Image from "next/image";
 import Head from "next/head";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 
 function Production({ data }) {
   let arrayShow = data.map((item, ind) => {
     return (
-      <div key={ind} className="group m-3 w-40">
+      <div key={ind} className="group m-3">
         <div className="group w-[150px] h-[80px] md:w-[200px] md:h-[100px] relative">
           <Image
             className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:bg-opacity-100"
@@ -29,23 +29,13 @@ function Production({ data }) {
 
 export default function Show(props) {
   const router = useRouter();
-  const determinePath = () => {
-    switch (props.params[0]) {
-      case "movie":
-        return "Movies";
-      case "tv":
-        return "TV";
-      default:
-        return "Movies";
-    }
-  };
+  const { show } = useContext(ShowContext);
   const data = JSON.parse(props.details);
   const similar = JSON.parse(props.similar);
-  const [state, setState] = useState(() => determinePath());
   console.log(data);
 
   const handleClick = () => {
-    if (state === "Movies") {
+    if (show === "Movies") {
       router.push("/");
     } else {
       router.push("/tv");
@@ -94,7 +84,7 @@ export default function Show(props) {
             onClick={() => handleClick()}
             className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
           >
-            {state}
+            {show}
           </button>
         </header>
         <div className="m-5 lg:mx-[200px]">
