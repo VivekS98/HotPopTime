@@ -49,12 +49,16 @@ export async function getServerSideProps({ params }) {
   switch (items[1]) {
     case "similar":
       result = await fetchSimilarList(items[0], items[2], 1);
+      break;
     case "production":
       result = await fetchListByCompany(items[0], items[2], 1);
+      break;
     case "search":
       result = await searchQuery(items[0], items[1], 1);
+      break;
     default:
-      result = await fetchList(items[0], items[2], 1);
+      result = await fetchList(items[0], items[1], 1);
+      break;
   }
 
   return {

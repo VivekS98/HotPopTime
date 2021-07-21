@@ -61,7 +61,7 @@ export default function Show(props) {
       list={similar}
       type={props.params[0]}
       genre="similar"
-      id={router.query.show[1]}
+      id={data.id}
     />
   );
 

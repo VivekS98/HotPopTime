@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 export default function MovieList({ list, type, genre, id }) {
   const router = useRouter();
   const handleClick = () => {
-    if (genre === "similar" || genre === "production") {
+    if (genre === "similar") {
       router.push(`/list/${type}/${genre}/${id}`);
     } else {
       router.push(`/list/${type}/${genre}`);
