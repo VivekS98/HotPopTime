@@ -7,34 +7,35 @@ import {
   fetchSimilarList,
   searchQuery,
 } from "../../utils/api";
-import { useState } from "react";
+import { useFetchList } from "../../utils/hooks";
 
 export default function Items(props) {
   const data = JSON.parse(props.data);
 
-  const [page, setPage] = useState(1);
-  const [list, setList] = useState(data.results);
+  const { list, fetchNext, spin } = useFetchList(
+    data.results,
+    props.params,
+    data.total_pages
+  );
   const router = useRouter();
   console.log(router.query.items);
 
-  const appendList = () => {};
-
   return (
-    <BottomScrollListener onBottom={() => appendList()}>
+    <BottomScrollListener onBottom={() => fetchNext()}>
       <div className="flex flex-col items-center">
         <div className="flex flex-row flex-wrap justify-center bg-transparent">
-          {list.map((movie) => (
+          {list.map((movie, ind) => (
             <div
-              key={movie?.title}
-              className="w-36 min-h-56 md:w-52 md:min-h-80"
+              key={`${movie?.title}/${ind}`}
+              className="w-36 mb-2 min-h-56 md:mb-4 md:w-52 md:min-h-80"
             >
               <MovieCard movie={movie} type={props.params[0]} />
             </div>
           ))}
         </div>
-        {page !== data.total_pages && (
+        {spin && (
           <svg
-            className="animate-spin h-10 w-10 rounded-full border-r-2 mb-3 border-gray-300 md:w-14 md:h-14 md:border-r-4"
+            className="animate-spin mt-5 h-10 w-10 rounded-full border-r-2 mb-3 border-gray-300 md:w-14 md:h-14 md:border-r-4"
             viewBox="0 0 24 24"
           ></svg>
         )}
