@@ -27,7 +27,7 @@ export function fetchDetails(type = "movie", id) {
 export function fetchListByCompany(type = "movie", id, page = 1) {
   return new Promise((resolve, reject) => {
     apiCall(
-      `https://api.themoviedb.org/3/discover/${type}?api_key=0de978b80925eb0e40210d8773fb3375&sort_by=popularity.desc&include_adult=true&include_video=true&page=${page}&with_companies=${id}&with_watch_monetization_types=flatrate`
+      `discover/${type}?api_key=0de978b80925eb0e40210d8773fb3375&sort_by=popularity.desc&include_adult=true&include_video=true&page=${page}&with_companies=${id}&with_watch_monetization_types=flatrate`
     )
       .then((data) => resolve(data))
       .catch((err) => reject(err));

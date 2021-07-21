@@ -5,10 +5,15 @@ import Head from "next/head";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 
-function Production({ data }) {
+function Production({ data, router, type }) {
+  console.log(data);
   let arrayShow = data.map((item, ind) => {
     return (
-      <div key={ind} className="group m-3">
+      <div
+        key={ind}
+        className="group m-3"
+        onClick={() => router.push(`/list/${type}/production/${item.id}`)}
+      >
         <div className="group w-[150px] h-[80px] md:w-[200px] md:h-[100px] relative">
           <Image
             className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:bg-opacity-100"
@@ -158,7 +163,11 @@ export default function Show(props) {
           </div>
           <div className="my-3 md:my-5">
             <h3 className="text-xl font-semibold md:text-2xl">Production:</h3>
-            <Production data={data.production_companies} />
+            <Production
+              data={data.production_companies}
+              router={router}
+              type={props.params[0]}
+            />
           </div>
           <h2 className="text-xl mb-3 font-semibold md:text-2xl">Similar:</h2>
         </div>
