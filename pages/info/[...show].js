@@ -2,7 +2,7 @@ import { fetchDetails, fetchSimilarList, ShowContext } from "../../utils/api";
 import MovieList from "../../components/MovieList";
 import Image from "next/image";
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 function Production({ data }) {
@@ -56,7 +56,14 @@ export default function Show(props) {
       </h6>
     );
   });
-  let similarView = <MovieList list={similar} type={props.params[0]} />;
+  let similarView = (
+    <MovieList
+      list={similar}
+      type={props.params[0]}
+      genre="similar"
+      id={router.query.show[1]}
+    />
+  );
 
   return (
     <div
@@ -87,7 +94,7 @@ export default function Show(props) {
             {show}
           </button>
         </header>
-        <div className="m-5 lg:mx-[200px]">
+        <div className="m-3 lg:mx-[200px]">
           <div className="flex flex-row flex-nowrap pb-5 flec-nowrap justify-between">
             <div className="w-36 h-48 md:w-60 md:h-96 lg:w-[330px] lg:h-[500px] relative">
               <Image
@@ -98,7 +105,7 @@ export default function Show(props) {
                 alt={data.title}
               />
             </div>
-            <div className="flex flex-col justify-around ml-2 items-start">
+            <div className="flex flex-col justify-around ml-2 p-0 items-baseline">
               <div>
                 <h1 className="text-lg font-semibold sm:text-2xl md:text-4xl">
                   {data.title ? data.title : data.name}

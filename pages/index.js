@@ -20,22 +20,22 @@ export default function Home(props) {
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Now Playing
       </h2>
-      <MovieList list={list.nowPlaying} type="movie" />
+      <MovieList list={list.nowPlaying} type="movie" genre="now_playing" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Popular
       </h2>
-      <MovieList list={list.popular} type="movie" />
+      <MovieList list={list.popular} type="movie" genre="popular" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Top Rated
       </h2>
-      <MovieList list={list.topRated} type="movie" />
+      <MovieList list={list.topRated} type="movie" genre="top_rated" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Upcoming
       </h2>
-      <MovieList list={list.upcoming} type="movie" />
+      <MovieList list={list.upcoming} type="movie" genre="upcoming" />
     </>
   );
 }

@@ -1,13 +1,25 @@
+import { useRouter } from "next/router";
 import MovieCard from "./MovieCard";
 
-export default function MovieList({ list, type }) {
-  console.log(list);
+export default function MovieList({ list, type, genre, id }) {
+  const router = useRouter();
+  const handleClick = () => {
+    if (genre === "similar" || genre === "production") {
+      router.push(`/list/${type}/${genre}/${id}`);
+    } else {
+      router.push(`/list/${type}/${genre}`);
+    }
+  };
+
   return (
     <div className="flex flex-row flex-nowrap bg-transparent overflow-auto">
-      {list.map((movie, ind) => (
-        <MovieCard key={`${ind}${movie?.title}`} movie={movie} type={type} />
+      {list.map((movie) => (
+        <MovieCard key={movie?.title} movie={movie} type={type} />
       ))}
-      <div className="group flex justify-center items-center">
+      <div
+        onClick={() => handleClick()}
+        className="group flex justify-center items-center"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-10 w-10 m-10 transition duration-200 text-white group-hover:transform group-hover:scale-125"

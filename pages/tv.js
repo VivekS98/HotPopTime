@@ -19,12 +19,12 @@ export default function TV(props) {
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Popular
       </h2>
-      <MovieList list={list.popular} type="tv" />
+      <MovieList list={list.popular} type="tv" genre="popular" />
       <br />
       <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
         Top Rated
       </h2>
-      <MovieList list={list.topRated} type="tv" />
+      <MovieList list={list.topRated} type="tv" genre="top_rated" />
     </>
   );
 }

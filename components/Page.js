@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
+import useSWR from "swr";
 import {
   fetchList,
   fetchListByCompany,
   fetchSimilarList,
   searchQuery,
 } from "../utils/api";
+import MovieCard from "./MovieCard";
 
 async function determineFetch(genre, id, type, page) {
   try {
@@ -39,9 +41,15 @@ export function useLazySwr(genre, id, type, page) {
 }
 
 export default function Page({ genre, id, type, page }) {
-  const { data, error, isLoading, isError } = useLazySwr(genre, id, type, page);
+  const { data } = useLazySwr(genre, id, type, page);
 
   if (data) {
-    return <></>;
+    return (
+      <>
+        {data.results.map((movie) => {
+          <MovieCard key={movie?.title} movie={movie} type={type} />;
+        })}
+      </>
+    );
   }
 }
