@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useSWR from "swr";
 import {
   fetchList,
   fetchListByCompany,
@@ -26,25 +26,30 @@ async function determineFetch(route, page) {
   }
 }
 
-export function useFetchList(initial, route, totalPages) {
-  const [page, setPage] = useState(1);
-  const [list, setList] = useState(initial);
-
-  let spin = page !== totalPages;
-
-  const fetchNextPage = () => {
-    if (spin) {
-      setPage((prev) => {
-        determineFetch(route, prev + 1)
-          .then((data) => {
-            console.log("Next page:", data);
-            setList((prev) => [...prev, ...data.results]);
-          })
-          .catch((err) => console.log(err));
-        return prev + 1;
-      });
+export function useFetchList(route, pathname) {
+  const { data, error } = useSWR(pathname, async () => {
+    try {
+      return await determineFetch(route.items, route.page);
+    } catch (err) {
+      return new Error(err);
     }
-  };
+  });
 
-  return { list, fetchNext: fetchNextPage, spin: spin };
+  let list = [];
+  let page = null;
+  let total = null;
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    list = data.results;
+    page = data.page;
+    total = data.total_pages;
+  }
+
+  let spin = !error && !data;
+
+  return { list, page, total, isLoading: spin };
 }
