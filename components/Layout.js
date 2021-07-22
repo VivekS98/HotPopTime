@@ -20,11 +20,17 @@ export default function Layout({ children }) {
     <div className="bg-default text-white cursor-default min-h-screen">
       <Head>
         <title>HotPopTime</title>
+        <meta property="og:title" content="HOTPOPTIME" key="title" />
+        <meta
+          name="description"
+          content="A Place for Movie Seekers"
+          key="description"
+        />
       </Head>
       <header
         className={`p-3 ${header} flex-row justify-between items-center md:p-6`}
       >
-        <span className="font-modak text-4xl text-[gold] md:text-5xl">
+        <span className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl">
           HOTPOPTIME
         </span>
         <button
@@ -35,6 +41,30 @@ export default function Layout({ children }) {
         </button>
       </header>
       <div className="font-default">{children}</div>
+      <footer className="flex flex-col">
+        <hr className="mt-5 mx-5 md:mx-16 md:mt-16" />
+        <span className="font-modak m-2 sm:m-4 text-3xl sm:text-4xl leading-none text-[gold] md:text-5xl md:leading-none">
+          HOTPOPTIME
+        </span>
+        <div className="text-center my-2 sm:my-4">
+          <h3 className="text-lg font-semibold inline-block md:text-xl">
+            Crafted by:
+          </h3>
+          <a
+            className="text-lg font-semibold transform-gpu duration-200 text-[gold] md:text-xl hover:text-yellow-400"
+            href="https://vkcodes.gatsbyjs.io"
+            rel="noreferrer"
+            target="_blank"
+          >
+            VKcodes
+          </a>
+        </div>
+        <div className="text-center">
+          <h3 className="text-sm sm:text-base">
+            © All Rights Reserved {new Date().getFullYear()}
+          </h3>
+        </div>
+      </footer>
     </div>
   );
 }

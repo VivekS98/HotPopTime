@@ -12,7 +12,7 @@ export default function Home(props) {
         <meta property="og:title" content="Movies | HOTPOPTIME" key="title" />
         <meta
           name="description"
-          content="A Place for Movie Seekers"
+          content="Fetch Movies as mush as possible."
           key="description"
         />
       </Head>

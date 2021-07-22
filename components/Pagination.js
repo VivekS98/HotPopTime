@@ -30,7 +30,7 @@ export default function Pagination({ page, total, query }) {
           }}
           passHref
         >
-          <button className="m-2 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
+          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
             Prev
           </button>
         </Link>
@@ -44,7 +44,7 @@ export default function Pagination({ page, total, query }) {
           }}
           passHref
         >
-          <button className="m-2 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
+          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
             {page - 4}
           </button>
         </Link>
@@ -58,7 +58,7 @@ export default function Pagination({ page, total, query }) {
           }}
           passHref
         >
-          <button className="m-2 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
+          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
             {page - 2}
           </button>
         </Link>
@@ -76,7 +76,7 @@ export default function Pagination({ page, total, query }) {
           }}
           passHref
         >
-          <button className="m-2 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
+          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
             {page + 2}
           </button>
         </Link>
@@ -89,7 +89,7 @@ export default function Pagination({ page, total, query }) {
           }}
           passHref
         >
-          <button className="m-2 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
+          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
             {page + 4}
           </button>
         </Link>
@@ -108,7 +108,7 @@ export default function Pagination({ page, total, query }) {
           }}
           passHref
         >
-          <button className="m-2 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
+          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
             Next
           </button>
         </Link>

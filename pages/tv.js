@@ -12,7 +12,7 @@ export default function TV(props) {
         <meta property="og:title" content="TV | HOTPOPTIME" key="title" />
         <meta
           name="description"
-          content="A Place for Show Seekers"
+          content="Fetch TV Shows as much as possible."
           key="description"
         />
       </Head>
