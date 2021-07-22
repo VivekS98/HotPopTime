@@ -15,11 +15,21 @@ function MyApp({ Component, pageProps }) {
   const setCurrentShow = () => {
     setShow((prev) => {
       if (prev === "Movies") {
-        router.push("/tv");
-        return "TV";
+        if (router.pathname === "/" || router.pathname === "/tv") {
+          router.push("/tv");
+          return "TV";
+        } else {
+          router.push("/");
+          return "Movies";
+        }
       } else {
-        router.push("/");
-        return "Movies";
+        if (router.pathname === "/" || router.pathname === "/tv") {
+          router.push("/");
+          return "Movies";
+        } else {
+          router.push("/tv");
+          return "TV";
+        }
       }
     });
   };

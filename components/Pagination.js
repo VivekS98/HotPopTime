@@ -68,7 +68,7 @@ export default function Pagination({ page, total, query }) {
         {page}
       </button>
 
-      <div className={page + 2 < 1 ? "hidden" : ""}>
+      <div style={{ display: next2 }}>
         <Link
           href={{
             pathname: "/list/[...items]",
@@ -81,7 +81,7 @@ export default function Pagination({ page, total, query }) {
           </button>
         </Link>
       </div>
-      <div className={page + 4 < 1 ? "hidden" : ""}>
+      <div style={{ display: next4 }}>
         <Link
           href={{
             pathname: "/list/[...items]",
