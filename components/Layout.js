@@ -17,7 +17,7 @@ export default function Layout({ children }) {
   }, [router.pathname]);
 
   return (
-    <div className="bg-default text-white cursor-default min-h-screen">
+    <div className="min-h-screen bg-default flex flex-col justify-between text-white cursor-default">
       <Head>
         <title>HotPopTime</title>
         <meta property="og:title" content="HOTPOPTIME" key="title" />
