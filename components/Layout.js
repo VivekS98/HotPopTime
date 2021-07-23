@@ -26,6 +26,7 @@ export default function Layout({ children }) {
           content="A Place for Movie Seekers"
           key="description"
         />
+        <link rel="icon" href="/logo.jpg" />
       </Head>
       <header
         className={`p-3 ${header} flex-row justify-between items-center md:p-6`}
