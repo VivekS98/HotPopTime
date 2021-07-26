@@ -89,7 +89,7 @@ export default function Show(props) {
       </Head>
       <div className="bg-default bg-opacity-50 min-h-screen p-2 md:p-5">
         <header className=" flex flex-row justify-between items-center">
-          <span className="font-modak text-4xl text-[gold] md:text-5xl">
+          <span className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl">
             HOTPOPTIME
           </span>
           <button

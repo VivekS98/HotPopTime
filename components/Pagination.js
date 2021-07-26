@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function Pagination({ page, total, query }) {
-  const [state, setState] = useState(0);
   const prev = Number(page) > 1;
   const next = Number(page) < Number(total);
 
@@ -11,13 +9,9 @@ export default function Pagination({ page, total, query }) {
   const next2 = page + 2 > total ? "none" : "block";
   const next4 = page + 4 > total ? "none" : "";
 
-  useEffect(() => {
-    setState((prev) => prev + 1);
-  }, [page]);
-
   return (
     <div className="flex flex-row flex-nowrap justify-center items-center">
-	<div
+      <div
         style={{
           pointerEvents: prev ? "auto" : "none",
           opacity: prev ? "1" : "0.5",
@@ -95,7 +89,7 @@ export default function Pagination({ page, total, query }) {
         </Link>
       </div>
 
-	<div
+      <div
         style={{
           pointerEvents: next ? "auto" : "none",
           opacity: next ? "1" : "0.5",
