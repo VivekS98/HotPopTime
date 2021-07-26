@@ -27,6 +27,10 @@ export default function Layout({ children }) {
           key="description"
         />
         <link rel="icon" href="/logo.jpg" />
+        <meta
+          name="google-site-verification"
+          content="7sZpLysoKU82i6xDWbR8mSoqwViic_1K42lA8Tt9fto"
+        />
       </Head>
       <header
         className={`p-3 ${header} flex-row justify-between items-center md:p-6`}
