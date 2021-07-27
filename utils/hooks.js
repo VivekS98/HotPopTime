@@ -6,7 +6,7 @@ import {
   searchQuery,
 } from "./api";
 
-async function determineFetch(route, page) {
+async function determineFetch(route, page, query) {
   try {
     switch (route[1]) {
       case "similar":
@@ -16,7 +16,7 @@ async function determineFetch(route, page) {
         return await fetchListByCompany(route[0], route[2], page);
 
       case "search":
-        return await searchQuery(route[0], route[1], page);
+        return await searchQuery(route[0], query, page);
 
       default:
         return await fetchList(route[0], route[1], page);
@@ -29,7 +29,7 @@ async function determineFetch(route, page) {
 export function useFetchList(route, pathname) {
   const { data, error } = useSWR(pathname, async () => {
     try {
-      return await determineFetch(route.items, route.page);
+      return await determineFetch(route.items, route.page, route.query);
     } catch (err) {
       return new Error(err);
     }

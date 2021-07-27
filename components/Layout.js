@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import { ShowContext } from "../utils/api";
+import Search from "./Search";
 
 export default function Layout({ children }) {
   const [header, setHeader] = useState("flex");
@@ -38,6 +39,7 @@ export default function Layout({ children }) {
         <span className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl">
           HOTPOPTIME
         </span>
+        <Search />
         <button
           onClick={() => setShow()}
           className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
@@ -46,8 +48,8 @@ export default function Layout({ children }) {
         </button>
       </header>
       <div className="font-default">{children}</div>
-      <footer className="flex flex-col">
-        <hr className="mt-5 mx-5 md:mx-16 md:mt-16" />
+      <footer className="m-0 flex flex-col justify-between">
+        <hr className="mt-3 mx-5 md:mx-16 md:mt-5" />
         <span className="font-modak m-2 sm:m-4 text-3xl sm:text-4xl leading-none text-[gold] md:text-5xl md:leading-none">
           HOTPOPTIME
         </span>

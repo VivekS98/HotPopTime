@@ -20,7 +20,7 @@ export default function Pagination({ page, total, query }) {
         <Link
           href={{
             pathname: "/list/[...items]",
-            query: { items: query, page: page - 1 },
+            query: { items: query.items, page: page - 1, query: query?.query },
           }}
           passHref
         >
@@ -34,7 +34,7 @@ export default function Pagination({ page, total, query }) {
         <Link
           href={{
             pathname: "/list/[...items]",
-            query: { items: query, page: page - 4 },
+            query: { items: query.items, page: page - 4, query: query?.query },
           }}
           passHref
         >
@@ -48,7 +48,7 @@ export default function Pagination({ page, total, query }) {
         <Link
           href={{
             pathname: "/list/[...items]",
-            query: { items: query, page: page - 2 },
+            query: { items: query.items, page: page - 2, query: query?.query },
           }}
           passHref
         >
@@ -66,7 +66,7 @@ export default function Pagination({ page, total, query }) {
         <Link
           href={{
             pathname: "/list/[...items]",
-            query: { items: query, page: page + 2 },
+            query: { items: query.items, page: page + 2, query: query?.query },
           }}
           passHref
         >
@@ -79,7 +79,7 @@ export default function Pagination({ page, total, query }) {
         <Link
           href={{
             pathname: "/list/[...items]",
-            query: { items: query, page: page + 4 },
+            query: { items: query.items, page: page + 4, query: query?.query },
           }}
           passHref
         >
@@ -98,7 +98,7 @@ export default function Pagination({ page, total, query }) {
         <Link
           href={{
             pathname: "/list/[...items]",
-            query: { items: query, page: page + 1 },
+            query: { items: query.items, page: page + 1, query: query?.query },
           }}
           passHref
         >

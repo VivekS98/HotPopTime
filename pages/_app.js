@@ -9,13 +9,13 @@ function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [show, setShow] = useState(
-    router.pathname.includes("/tv") ? "TV" : "Movies"
+    router.asPath.includes("/tv") ? "TV" : "Movies"
   );
 
   const setCurrentShow = () => {
     setShow((prev) => {
       if (prev === "Movies") {
-        if (router.pathname === "/" || router.pathname === "/tv") {
+        if (router.asPath === "/" || router.asPath === "/tv") {
           router.push("/tv");
           return "TV";
         } else {
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
           return "Movies";
         }
       } else {
-        if (router.pathname === "/" || router.pathname === "/tv") {
+        if (router.asPath === "/" || router.asPath === "/tv") {
           router.push("/");
           return "Movies";
         } else {

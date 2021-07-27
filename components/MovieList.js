@@ -13,8 +13,8 @@ export default function MovieList({ list, type, genre, id }) {
 
   return (
     <div className="flex flex-row flex-nowrap bg-transparent overflow-auto">
-      {list.map((movie) => (
-        <MovieCard key={movie?.title} movie={movie} type={type} />
+      {list.map((movie, ind) => (
+        <MovieCard key={`${movie?.title}/${ind}`} movie={movie} type={type} />
       ))}
       <div
         onClick={() => handleClick()}
