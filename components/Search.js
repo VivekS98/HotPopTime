@@ -80,7 +80,7 @@ export default function Search() {
           </svg>
         </div>
         {view && (
-          <div className="absolute m-2 inset-x-0 top-0 bg-default bg-opacity-70 flex items-center">
+          <div className="absolute p-2 inset-x-0 top-0 bg-default bg-opacity-70 flex items-center">
             <SearchComponent />
             <div onClick={() => setView((prev) => !prev)}>
               <svg
