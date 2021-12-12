@@ -11,6 +11,7 @@ export default function Items() {
     router.query,
     router.asPath
   );
+
   if (isLoading) {
     return <Loading />;
   } else if (router.query.items && list?.length < 1) {
@@ -67,5 +68,7 @@ export default function Items() {
         <Pagination page={page} total={total} query={router.query} />
       </div>
     );
+  } else {
+    return <Loading />;
   }
 }

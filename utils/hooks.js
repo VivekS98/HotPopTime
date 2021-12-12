@@ -40,7 +40,7 @@ export function useFetchList(route, pathname) {
   let total = null;
 
   if (error) {
-    console.log(error);
+    console.log("ERROR::", error);
   }
 
   if (data) {
