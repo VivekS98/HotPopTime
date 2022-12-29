@@ -3,18 +3,12 @@ import { useRouter } from "next/router";
 import Loading from "../../components/Loading";
 import MovieCard from "../../components/MovieCard";
 import Pagination from "../../components/Pagination";
-import { useFetchList } from "../../utils/hooks";
+import { getFetchList } from "../../utils/hooks";
 
-export default function Items() {
+export default function Items({ list, page, total }) {
   const router = useRouter();
-  const { list, page, total, isLoading } = useFetchList(
-    router.query,
-    router.asPath
-  );
 
-  if (isLoading) {
-    return <Loading />;
-  } else if (router.query.items && list?.length < 1) {
+  if (router.query.items && list?.length < 1) {
     return (
       <div className="flex flex-row flex-wrap justify-center items-center">
         <svg
@@ -36,7 +30,7 @@ export default function Items() {
         </h3>
       </div>
     );
-  } else if (router.query.items && list && !isLoading) {
+  } else if (router.query.items && list) {
     return (
       <div className="flex flex-col items-center">
         <Head>
@@ -71,4 +65,12 @@ export default function Items() {
   } else {
     return <Loading />;
   }
+}
+
+export async function getServerSideProps({ query }) {
+  const { list, page, total } = await getFetchList(query);
+
+  return {
+    props: { list, page, total },
+  };
 }

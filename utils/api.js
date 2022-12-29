@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext } from "react";
 
-const api_key = "0de978b80925eb0e40210d8773fb3375";
+const api_key = process.env.API_KEY;
 export const ShowContext = createContext({
   show: "Movies",
   setCurrentShow: () => {},

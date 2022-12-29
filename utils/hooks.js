@@ -1,4 +1,3 @@
-import useSWR from "swr";
 import {
   fetchList,
   fetchListByCompany,
@@ -26,30 +25,17 @@ async function determineFetch(route, page, query) {
   }
 }
 
-export function useFetchList(route, pathname) {
-  const { data, error } = useSWR(pathname, async () => {
-    try {
-      return await determineFetch(route.items, route.page, route.query);
-    } catch (err) {
-      return new Error(err);
-    }
-  });
+export async function getFetchList(route) {
+  const data = await determineFetch(route.items, route.page, route.query);
 
   let list = [];
   let page = null;
   let total = null;
-
-  if (error) {
-    console.log("ERROR::", error);
-  }
-
   if (data) {
     list = data.results;
     page = data.page;
     total = data.total_pages;
   }
 
-  let spin = !error && !data;
-
-  return { list, page, total, isLoading: spin };
+  return { list, page, total };
 }

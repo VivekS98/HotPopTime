@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import Search from "../../components/Search";
 
 function Production({ data, router, type }) {
-  console.log(data);
   let arrayShow = data.map((item, ind) => {
     return (
       <div
@@ -38,7 +37,6 @@ export default function Show(props) {
   const { show } = useContext(ShowContext);
   const data = JSON.parse(props.details);
   const similar = JSON.parse(props.similar);
-  console.log(data);
 
   const handleClick = () => {
     if (show === "Movies") {
