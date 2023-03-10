@@ -40,7 +40,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const nowPlaying = await fetchList("movie", "now_playing");
   const popular = await fetchList("movie", "popular");
   const topRated = await fetchList("movie", "top_rated");
@@ -56,7 +56,6 @@ export async function getStaticProps() {
   return {
     props: {
       list: list,
-    },
-    revalidate: 60 * 60 * 20,
+    }
   };
 }
