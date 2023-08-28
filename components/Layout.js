@@ -59,7 +59,7 @@ export default function Layout({ children }) {
           </h3>
           <a
             className="text-lg font-semibold transform-gpu duration-200 text-[gold] md:text-xl hover:text-yellow-400"
-            href="https://vkcodes.vercel.app"
+            href="https://vkcodes.com"
             rel="noreferrer"
             target="_blank"
           >
