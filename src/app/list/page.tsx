@@ -65,12 +65,11 @@ export default function Items() {
         </h2>
         <div className="sm:mx-14 flex flex-row flex-wrap justify-center gap-5 bg-transparent transition-all duration-300">
           {list.map((movie: any, ind: number) => (
-            <div className="w-36 min-h-56 md:mb-4 md:w-52 md:min-h-80 transition-all duration-500 hover:mx-4">
-              <MovieCard
-                key={`${movie?.title}/${ind}`}
-                movie={movie}
-                type={type}
-              />
+            <div
+              key={`${movie?.title}/${ind}`}
+              className="w-36 min-h-56 md:mb-4 md:w-52 md:min-h-80 transition-all duration-500 hover:mx-4"
+            >
+              <MovieCard movie={movie} type={type} />
             </div>
           ))}
         </div>
