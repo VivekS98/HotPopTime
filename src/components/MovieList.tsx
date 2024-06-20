@@ -20,7 +20,7 @@ export default function MovieList({ list, type, genre, id }: Props) {
   };
 
   return (
-    <div className="flex flex-row flex-nowrap bg-transparent overflow-auto">
+    <div className="flex flex-row flex-nowrap bg-transparent overflow-auto transition-all duration-300">
       {list?.map((movie, ind) => (
         <MovieCard key={`${movie?.title}/${ind}`} movie={movie} type={type} />
       ))}

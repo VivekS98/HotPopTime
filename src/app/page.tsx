@@ -58,7 +58,7 @@ export default function Home() {
       <br />
       {type !== "tv" && (
         <>
-          <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
+          <h2 className="text-xl pl-10 m-3 font-semibold text-gray-100 md:text-3xl">
             Now Playing
           </h2>
           <MovieList
@@ -69,7 +69,7 @@ export default function Home() {
           <br />
         </>
       )}
-      <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
+      <h2 className="text-xl pl-10 m-3 font-semibold text-gray-100 md:text-3xl">
         Popular
       </h2>
       <MovieList
@@ -78,7 +78,7 @@ export default function Home() {
         genre="popular"
       />
       <br />
-      <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
+      <h2 className="text-xl pl-10 m-3 font-semibold text-gray-100 md:text-3xl">
         Top Rated
       </h2>
       <MovieList
@@ -89,7 +89,7 @@ export default function Home() {
       <br />
       {type !== "tv" && (
         <>
-          <h2 className="text-xl m-3 font-semibold text-gray-100 md:text-3xl">
+          <h2 className="text-xl pl-10 m-3 font-semibold text-gray-100 md:text-3xl">
             Upcoming
           </h2>
           <MovieList
