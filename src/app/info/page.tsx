@@ -165,7 +165,7 @@ export default function Show() {
               <h3 className="text-lg font-semibold sm:text-xl">
                 Rating:
                 <span className="text-gray-300 ml-2 font-medium">
-                  {data?.vote_average}
+                  {data?.vote_average?.toFixed(2)}
                 </span>
               </h3>
               <h3 className="flex-row flex-wrap hidden text-lg font-semibold sm:text-xl md:flex">

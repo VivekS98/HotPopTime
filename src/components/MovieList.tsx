@@ -1,5 +1,7 @@
 import { useRouter } from "next/navigation";
 import MovieCard from "./MovieCard";
+// @ts-ignore
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 interface Props {
   list: any[];
@@ -20,7 +22,7 @@ export default function MovieList({ list, type, genre, id }: Props) {
   };
 
   return (
-    <div className="flex flex-row flex-nowrap bg-transparent overflow-auto transition-all duration-300">
+    <div className="md:ml-6 flex flex-row flex-nowrap bg-transparent overflow-auto transition-all duration-300">
       {list?.map((movie, ind) => (
         <MovieCard key={`${movie?.title}/${ind}`} movie={movie} type={type} />
       ))}
