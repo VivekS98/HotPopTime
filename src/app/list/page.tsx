@@ -25,7 +25,8 @@ export default function Items() {
         setTotal(data.total);
       })
       .catch((err) => console.log(err));
-  }, [type, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, id, page, genere, query]);
 
   if (type && list?.length < 1) {
     return (

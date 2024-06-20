@@ -16,8 +16,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        modak: ["Modak", "cursive"],
-        default: ["Merriweather Sans", "sans - serif"],
+        modak: ["var(--font-modak)"],
+        default: ["var(--font-merriweather)"],
       },
       backgroundColor: {
         default: "#130F2D",

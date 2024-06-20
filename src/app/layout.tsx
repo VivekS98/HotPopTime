@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Merriweather_Sans, Modak } from "next/font/google";
 import Layout from "@/components/Layout";
+import "./globals.css";
+import { Suspense } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const merriweather_sans = Merriweather_Sans({
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+});
+const modak = Modak({
+  subsets: ["latin"],
+  variable: "--font-modak",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,20 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Modak&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className={inter.className}>
-        <Layout>{children}</Layout>
+      <body className={`${merriweather_sans.variable} ${modak.variable}`}>
+        <Suspense>
+          <Layout>{children}</Layout>
+        </Suspense>
       </body>
     </html>
   );

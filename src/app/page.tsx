@@ -6,11 +6,7 @@ import { fetchList } from "../utils/api";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-interface Props {
-  list: string;
-}
-
-export default function Home(props: Props) {
+export default function Home() {
   const [list, setList] = useState<any>({});
 
   const params = useSearchParams();

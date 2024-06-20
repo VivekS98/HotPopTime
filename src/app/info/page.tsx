@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Head from "next/head";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MovieList from "@/components/MovieList";
 import Search from "@/components/Search";
 import { fetchDetails, fetchSimilarList } from "@/utils/api";

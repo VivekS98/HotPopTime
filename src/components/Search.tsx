@@ -12,7 +12,7 @@ function SearchComponent() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (state.length > 1) {
-      router.push(`/list/${type}/search?query=${state}&page=1`);
+      router.push(`/list?type=${type}&genere=search&query=${state}&page=1`);
     }
   };
 
