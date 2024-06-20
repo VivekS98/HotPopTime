@@ -28,6 +28,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.jpg" sizes="any" />
+        <meta
+          name="google-site-verification"
+          content="7sZpLysoKU82i6xDWbR8mSoqwViic_1K42lA8Tt9fto"
+        />
       </head>
       <body className={`${merriweather_sans.variable} ${modak.variable}`}>
         <Suspense>
