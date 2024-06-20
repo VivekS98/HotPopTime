@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Head from "next/head";
 import { useEffect, useState } from "react";
 import MovieList from "@/components/MovieList";
 import Search from "@/components/Search";
@@ -66,7 +65,13 @@ export default function Show() {
 
   useEffect(() => {
     fetchDetails(type, id)
-      .then((res) => setData(res))
+      .then((res) => {
+        setData(res);
+        console.log(res);
+        document.title = `${res?.title || res?.name} · HotPopTime`;
+        const doc = document.querySelector('meta[name="description"]');
+        doc?.setAttribute("content", data?.tagline);
+      })
       .catch((err) => console.error(err));
 
     fetchSimilarList(type, id)
@@ -113,11 +118,6 @@ export default function Show() {
         backgroundSize: "cover",
       }}
     >
-      <Head>
-        <title>{data?.title}</title>
-        <meta property="og:title" content={data?.title} key="title" />
-        <meta name="description" content={data?.overview} key="description" />
-      </Head>
       <div className="bg-default bg-opacity-50 min-h-screen p-2 md:p-5">
         <header className=" flex flex-row justify-between items-center">
           <Link
@@ -142,13 +142,13 @@ export default function Show() {
                 className="object-fill object-center"
                 layout="fill"
                 priority
-                alt={data?.title ? data?.title : data?.name}
+                alt={data?.title || data?.name}
               />
             </div>
             <div className="flex flex-col justify-around ml-2 p-0 items-baseline">
               <div>
                 <h1 className="text-lg font-semibold sm:text-2xl md:text-4xl">
-                  {data?.title ? data?.title : data?.name}
+                  {data?.title || data?.name}
                 </h1>
                 <h3 className="text-lg hidden text-gray-300 sm:text-xl md:flex">
                   {data?.tagline}

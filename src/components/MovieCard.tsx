@@ -19,7 +19,7 @@ export default function MovieCard({ movie, type }: Props) {
           className="transition-gpu duration-200 group-hover:transform group-hover:scale-110 object-cover object-center"
           src={`https://image.tmdb.org/t/p/w185${movie?.poster_path}`}
           layout="fill"
-          alt={movie?.title}
+          alt={movie?.title || movie?.name}
         />
       </div>
       <h5 className="text-base ml-1 md:text-xl transition-gpu duration-200 group-hover:transform group-hover:scale-90">
