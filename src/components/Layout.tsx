@@ -1,21 +1,61 @@
-import { useRouter } from "next/router";
+"use client";
 import Head from "next/head";
-import { useContext, useEffect, useState } from "react";
-import { ShowContext } from "../utils/api";
+import { ReactNode, useEffect, useState } from "react";
 import Search from "./Search";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Loading from "./Loading";
+import { Router } from "next/router";
+import Link from "next/link";
 
-export default function Layout({ children }) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function Layout({ children }: Props) {
   const [header, setHeader] = useState("flex");
-  const { show, setShow } = useContext(ShowContext);
+
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const type = params.get("type");
 
   useEffect(() => {
-    if (router.pathname.includes("/info")) {
+    const start = () => {
+      setLoading(true);
+    };
+    const end = () => {
+      setLoading(false);
+    };
+    Router.events.on("routeChangeStart", start);
+    Router.events.on("routeChangeComplete", end);
+    Router.events.on("routeChangeError", end);
+    return () => {
+      Router.events.off("routeChangeStart", start);
+      Router.events.off("routeChangeComplete", end);
+      Router.events.off("routeChangeError", end);
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (type === "tv") {
+      router.push("/");
+    } else {
+      router.push("/?type=tv");
+    }
+  };
+
+  useEffect(() => {
+    if (pathname.includes("/info")) {
       setHeader("hidden");
     } else {
       setHeader("flex");
     }
-  }, [router.pathname]);
+  }, [pathname, type]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen bg-default flex flex-col justify-between text-white cursor-default">
@@ -36,15 +76,18 @@ export default function Layout({ children }) {
       <header
         className={`p-3 ${header} flex-row justify-between items-center md:p-6`}
       >
-        <span className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl">
+        <Link
+          className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl"
+          href="/"
+        >
           HOTPOPTIME
-        </span>
+        </Link>
         <Search />
         <button
-          onClick={() => setShow()}
+          onClick={handleClick}
           className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
         >
-          {show}
+          {type === "tv" ? "TV" : "Movies"}
         </button>
       </header>
       <div className="font-default">{children}</div>

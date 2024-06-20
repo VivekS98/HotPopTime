@@ -1,19 +1,27 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import MovieCard from "./MovieCard";
 
-export default function MovieList({ list, type, genre, id }) {
+interface Props {
+  list: any[];
+  type: string;
+  genre: string;
+  id?: string;
+}
+
+export default function MovieList({ list, type, genre, id }: Props) {
   const router = useRouter();
+
   const handleClick = () => {
     if (genre === "similar") {
-      router.push(`/list/${type}/${genre}/${id}`);
+      router.push(`/list?type=${type}&genere=${genre}&id=${id}`);
     } else {
-      router.push(`/list/${type}/${genre}`);
+      router.push(`/list?type=${type}&genere=${genre}`);
     }
   };
 
   return (
     <div className="flex flex-row flex-nowrap bg-transparent overflow-auto">
-      {list.map((movie, ind) => (
+      {list?.map((movie, ind) => (
         <MovieCard key={`${movie?.title}/${ind}`} movie={movie} type={type} />
       ))}
       <div

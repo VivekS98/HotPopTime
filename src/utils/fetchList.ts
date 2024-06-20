@@ -5,7 +5,7 @@ import {
   searchQuery,
 } from "./api";
 
-async function determineFetch(route, page, query) {
+async function determineFetch(route: string[], page: number, query: string) {
   try {
     switch (route[1]) {
       case "similar":
@@ -20,12 +20,16 @@ async function determineFetch(route, page, query) {
       default:
         return await fetchList(route[0], route[1], page);
     }
-  } catch (err) {
+  } catch (err: any) {
     return new Error(err);
   }
 }
 
-export async function getFetchList(route) {
+export async function getFetchList(route: {
+  items: string[];
+  page: number;
+  query: string;
+}) {
   const data = await determineFetch(route.items, route.page, route.query);
 
   let list = [];

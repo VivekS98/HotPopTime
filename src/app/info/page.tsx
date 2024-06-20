@@ -1,59 +1,87 @@
-import { fetchDetails, fetchSimilarList, ShowContext } from "../../utils/api";
-import MovieList from "../../components/MovieList";
+"use client";
+
 import Image from "next/image";
 import Head from "next/head";
-import { useContext } from "react";
-import { useRouter } from "next/router";
-import Search from "../../components/Search";
+import { useContext, useEffect, useState } from "react";
+import MovieList from "@/components/MovieList";
+import Search from "@/components/Search";
+import { fetchDetails, fetchSimilarList } from "@/utils/api";
+import { useRouter, useSearchParams } from "next/navigation";
+import Loading from "@/components/Loading";
+import Link from "next/link";
 
-function Production({ data, router, type }) {
-  let arrayShow = data.map((item, ind) => {
-    return (
-      <div
-        key={ind}
-        className="group m-3"
-        onClick={() => router.push(`/list/${type}/production/${item.id}`)}
-      >
-        <div className="group w-[150px] h-[80px] md:w-[200px] md:h-[100px] relative">
-          <Image
-            className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:bg-opacity-100"
-            src={`https://image.tmdb.org/t/p/w300${item.logo_path}`}
-            layout="fill"
-            alt={data.title}
-          />
-        </div>
-
-        <h5 className="text-lg">{item.name}</h5>
-        <h6 className="text-gray-300 text-lg">{item.origin_country}</h6>
-      </div>
-    );
-  });
-
-  return <div className="flex flex-row overflow-auto">{arrayShow}</div>;
+interface ProductionProps {
+  data: any;
+  type: string;
 }
 
-export default function Show(props) {
+function Production({ data, type }: ProductionProps) {
   const router = useRouter();
-  const { show } = useContext(ShowContext);
-  const data = JSON.parse(props.details);
-  const similar = JSON.parse(props.similar);
+
+  return (
+    <div className="flex flex-row overflow-auto">
+      {data?.map((item: any, ind: number) => {
+        return (
+          <div
+            key={ind}
+            className="group m-3"
+            onClick={() =>
+              router.push(`/list?type=${type}&genere=production&id=${item.id}`)
+            }
+          >
+            <div className="group w-[150px] h-[80px] md:w-[200px] md:h-[100px] relative">
+              <Image
+                className="bg-gray-400 bg-opacity-50 rounded-xl transition-gpu duration-200 group-hover:bg-opacity-100"
+                src={`https://image.tmdb.org/t/p/w300${item.logo_path}`}
+                layout="fill"
+                alt={data?.title ? data?.title : data?.name}
+              />
+            </div>
+
+            <h5 className="text-lg">{item.name}</h5>
+            <h6 className="text-gray-300 text-lg">{item.origin_country}</h6>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function Show() {
+  const [data, setData] = useState<any>({});
+  const [similar, setSimilar] = useState<any>([]);
+
+  const router = useRouter();
+  const params = useSearchParams();
+  const id = params.get("id") || "0";
+  const type = params.get("type") || "movie";
 
   const handleClick = () => {
-    if (show === "Movies") {
-      router.push("/");
+    if (type === "tv") {
+      router.push("/?type=tv");
     } else {
-      router.push("/tv");
+      router.push("/");
     }
   };
 
-  let genresView = [...data.genres].map((item, ind) => {
+  useEffect(() => {
+    fetchDetails(type, id)
+      .then((res) => setData(res))
+      .catch((err) => console.error(err));
+
+    fetchSimilarList(type, id)
+      .then((res) => setSimilar(res))
+      .catch((err) => console.error(err));
+  }, [type, id]);
+
+  let genresView = data?.genres?.map((item: any, ind: number) => {
     return (
       <h6 className="ml-2" key={ind}>
         {item.name}
       </h6>
     );
   });
-  let languages = [...data.spoken_languages].map((item, ind) => {
+  let languages = data?.spoken_languages?.map((item: any, ind: number) => {
     return (
       <h6 key={ind} className="ml-2">
         {item.english_name}
@@ -62,19 +90,23 @@ export default function Show(props) {
   });
   let similarView = (
     <MovieList
-      list={similar}
-      type={props.params[0]}
+      list={similar?.results || []}
+      type={type}
       genre="similar"
-      id={data.id}
+      id={data?.id}
     />
   );
+
+  if (!data?.id) {
+    return <Loading />;
+  }
 
   return (
     <div
       style={{
         minHeight: "100vh",
         backgroundColor: "#130F2D",
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${data.backdrop_path})`,
+        backgroundImage: `url(https://image.tmdb.org/t/p/original${data?.backdrop_path})`,
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
@@ -82,53 +114,58 @@ export default function Show(props) {
       }}
     >
       <Head>
-        <title>{data.title}</title>
-        <meta property="og:title" content={data.title} key="title" />
-        <meta name="description" content={data.overview} key="description" />
+        <title>{data?.title}</title>
+        <meta property="og:title" content={data?.title} key="title" />
+        <meta name="description" content={data?.overview} key="description" />
       </Head>
       <div className="bg-default bg-opacity-50 min-h-screen p-2 md:p-5">
         <header className=" flex flex-row justify-between items-center">
-          <span className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl">
+          <Link
+            className="font-modak text-3xl sm:text-4xl text-[gold] md:text-5xl"
+            href="/"
+          >
             HOTPOPTIME
-          </span>
+          </Link>
           <Search />
           <button
-            onClick={() => handleClick()}
+            onClick={handleClick}
             className="px-2 py-1 text-base rounded-md ring-2 ring-white transition duration-200 md:px-4 md:py-2 md:text-xl hover:bg-white hover:text-opposite active:bg-default active:text-white"
           >
-            {show}
+            {type === "tv" ? "TV" : "Movies"}
           </button>
         </header>
         <div className="m-3 lg:mx-[200px]">
           <div className="flex flex-row flex-nowrap pb-5 flec-nowrap justify-between">
             <div className="w-36 h-48 md:w-60 md:h-96 lg:w-[330px] lg:h-[500px] relative">
               <Image
-                src={`https://image.tmdb.org/t/p/w342${data.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w342${data?.poster_path}`}
+                className="object-fill object-center"
                 layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-                alt={data.title}
+                priority
+                alt={data?.title ? data?.title : data?.name}
               />
             </div>
             <div className="flex flex-col justify-around ml-2 p-0 items-baseline">
               <div>
                 <h1 className="text-lg font-semibold sm:text-2xl md:text-4xl">
-                  {data.title ? data.title : data.name}
+                  {data?.title ? data?.title : data?.name}
                 </h1>
                 <h3 className="text-lg hidden text-gray-300 sm:text-xl md:flex">
-                  {data.tagline}
+                  {data?.tagline}
                 </h3>
               </div>
               <h3 className="text-lg font-semibold sm:text-xl">
                 Release:
                 <span className="text-gray-300 ml-2 font-medium">
-                  {data.release_date ? data.release_date : data.first_air_date}
+                  {data?.release_date
+                    ? data?.release_date
+                    : data?.first_air_date}
                 </span>
               </h3>
               <h3 className="text-lg font-semibold sm:text-xl">
                 Rating:
                 <span className="text-gray-300 ml-2 font-medium">
-                  {data.vote_average}
+                  {data?.vote_average}
                 </span>
               </h3>
               <h3 className="flex-row flex-wrap hidden text-lg font-semibold sm:text-xl md:flex">
@@ -142,7 +179,7 @@ export default function Show(props) {
           <h3 className="text-lg font-semibold md:hidden">
             Tagline:
             <span className="text-gray-300 font-normal ml-2 text-lg sm:text-xl">
-              {data.tagline}
+              {data?.tagline}
             </span>
           </h3>
           <h3 className="flex flex-row flex-wrap text-lg font-semibold sm:text-xl md:hidden">
@@ -159,15 +196,11 @@ export default function Show(props) {
           </h3>
           <div className="my-3 md:my-5">
             <h3 className="text-xl font-semibold md:text-2xl">Overview:</h3>
-            <p className="text-gray-300 text-lg">{data.overview}</p>
+            <p className="text-gray-300 text-lg">{data?.overview}</p>
           </div>
           <div className="my-3 md:my-5">
             <h3 className="text-xl font-semibold md:text-2xl">Production:</h3>
-            <Production
-              data={data.production_companies}
-              router={router}
-              type={props.params[0]}
-            />
+            <Production data={data?.production_companies} type={type} />
           </div>
           <h2 className="text-xl mb-3 font-semibold md:text-2xl">Similar:</h2>
         </div>
@@ -175,19 +208,4 @@ export default function Show(props) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps({ params }) {
-  const { show } = params;
-
-  const data = await fetchDetails(show[0], show[1]);
-  const similar = await fetchSimilarList(show[0], show[1]);
-
-  return {
-    props: {
-      details: JSON.stringify(data),
-      similar: JSON.stringify(similar.results),
-      params: show,
-    },
-  };
 }

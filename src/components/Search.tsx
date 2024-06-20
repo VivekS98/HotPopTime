@@ -1,25 +1,25 @@
-import { useRouter } from "next/dist/client/router";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 function SearchComponent() {
   const [state, setState] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
 
-  const type = router.asPath.includes("/tv") ? "tv" : "movie";
+  const type = pathname.includes("/tv") ? "tv" : "movie";
   const placeholder = type === "tv" ? "TV Show" : "Movies";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (state.length > 1) {
-      router.push({
-        pathname: "/list/[...items]",
-        query: { items: [type, "search"], query: state, page: "1" },
-      });
+      router.push(`/list/${type}/search?query=${state}&page=1`);
     }
   };
-  const handleChange = (e) => {
+
+  const handleChange = (e: any) => {
     setState(e.target.value);
   };
+
   return (
     <form
       className="bg-gray-700 flex flex-row flex-nowrap justify-between items-center h-12 w-80 p-2 rounded-full"

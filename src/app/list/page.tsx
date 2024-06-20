@@ -1,0 +1,81 @@
+"use client";
+
+import Loading from "@/components/Loading";
+import MovieCard from "@/components/MovieCard";
+import Pagination from "@/components/Pagination";
+import { getFetchList } from "@/utils/fetchList";
+import Head from "next/head";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+export default function Items() {
+  const [list, setList] = useState<any>([]);
+  const [total, setTotal] = useState(0);
+  const params = useSearchParams();
+  const page = Number(params.get("page")) || 1;
+  const query = params.get("query") || "";
+  const genere = params.get("genere") || "";
+  const id = params.get("id") || "0";
+  const type = params.get("type") || "movie";
+
+  useEffect(() => {
+    getFetchList({ items: [type, genere, id], page, query })
+      .then((data) => {
+        setList(data.list);
+        setTotal(data.total);
+      })
+      .catch((err) => console.log(err));
+  }, [type, id]);
+
+  if (type && list?.length < 1) {
+    return (
+      <div className="flex flex-row flex-wrap justify-center items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"
+          />
+        </svg>
+        <h3 className="text-xl font-semibold">No such {type}</h3>
+      </div>
+    );
+  } else if (genere && list) {
+    return (
+      <div className="flex flex-col items-center">
+        <Head>
+          <title>{`${genere} | HOTPOPTIME`}</title>
+          <meta property="og:title" content={genere} key="title" />
+          <meta
+            name="description"
+            content="Paginated list of Movies/TV."
+            key="description"
+          />
+        </Head>
+        <h2 className="text-2xl m-2 font-semibold text-left sm:text-3xl md:text-4xl md:m-4">
+          {genere}
+        </h2>
+        <div className="flex flex-row flex-wrap justify-center bg-transparent">
+          {list.map((movie: any, ind: number) => (
+            <div
+              key={`${movie?.title}/${ind}`}
+              className="w-36 mb-2 min-h-56 md:mb-4 md:w-52 md:min-h-80"
+            >
+              <MovieCard movie={movie} type={type} />
+            </div>
+          ))}
+        </div>
+        <Pagination total={total} />
+      </div>
+    );
+  } else {
+    return <Loading />;
+  }
+}

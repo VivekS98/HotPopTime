@@ -1,6 +1,18 @@
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-export default function Pagination({ page, total, query }) {
+interface Props {
+  total: number;
+}
+
+export default function Pagination({ total }: Props) {
+  const params = useSearchParams();
+  const page = Number(params.get("page")) || 1;
+  const query = params.get("query") || "";
+  const genere = params.get("genere") || "";
+  const id = params.get("id") || "0";
+  const type = params.get("type") || "movie";
+
   const prev = Number(page) > 1;
   const next = Number(page) < Number(total);
 
@@ -18,10 +30,7 @@ export default function Pagination({ page, total, query }) {
         }}
       >
         <Link
-          href={{
-            pathname: "/list/[...items]",
-            query: { items: query.items, page: 1, query: query?.query },
-          }}
+          href={`/list?page=1&query=${query}&genere=${genere}&id=${id}&type=${type}`}
           passHref
         >
           <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
@@ -32,10 +41,9 @@ export default function Pagination({ page, total, query }) {
 
       <div style={{ display: prev4 }}>
         <Link
-          href={{
-            pathname: "/list/[...items]",
-            query: { items: query.items, page: page - 2, query: query?.query },
-          }}
+          href={`/list?page=${
+            page - 2
+          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
           passHref
         >
           <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
@@ -46,10 +54,9 @@ export default function Pagination({ page, total, query }) {
 
       <div style={{ display: prev2 }}>
         <Link
-          href={{
-            pathname: "/list/[...items]",
-            query: { items: query.items, page: page - 1, query: query?.query },
-          }}
+          href={`/list?page=${
+            page - 1
+          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
           passHref
         >
           <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
@@ -64,10 +71,9 @@ export default function Pagination({ page, total, query }) {
 
       <div style={{ display: next2 }}>
         <Link
-          href={{
-            pathname: "/list/[...items]",
-            query: { items: query.items, page: page + 1, query: query?.query },
-          }}
+          href={`/list?page=${
+            page + 1
+          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
           passHref
         >
           <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
@@ -77,10 +83,9 @@ export default function Pagination({ page, total, query }) {
       </div>
       <div style={{ display: next4 }}>
         <Link
-          href={{
-            pathname: "/list/[...items]",
-            query: { items: query.items, page: page + 2, query: query?.query },
-          }}
+          href={`/list?page=${
+            page + 2
+          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
           passHref
         >
           <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
@@ -96,10 +101,7 @@ export default function Pagination({ page, total, query }) {
         }}
       >
         <Link
-          href={{
-            pathname: "/list/[...items]",
-            query: { items: query.items, page: total, query: query?.query },
-          }}
+          href={`/list?page=${total}&query=${query}&genere=${genere}&id=${id}&type=${type}`}
           passHref
         >
           <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
