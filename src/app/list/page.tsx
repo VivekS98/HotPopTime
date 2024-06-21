@@ -1,10 +1,10 @@
 "use client";
 
+import Head from "next/head";
 import Loading from "@/components/Loading";
 import MovieCard from "@/components/MovieCard";
 import Pagination from "@/components/Pagination";
 import { getFetchList } from "@/utils/fetchList";
-import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

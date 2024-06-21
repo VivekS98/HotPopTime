@@ -11,7 +11,7 @@ export default function MovieCard({ movie, type }: Props) {
   const router = useRouter();
 
   return (
-    <CardContainer className="group transition-all duration-500">
+    <CardContainer className="group">
       <CardBody className="z-0 transition-all delay-150 duration-500 group-hover:mx-12 md:group-hover:mx-14 my-4">
         <div
           className="transition duration-300 cursor-pointer w-fit"
@@ -29,17 +29,17 @@ export default function MovieCard({ movie, type }: Props) {
             </div>
           </CardItem>
           <CardItem translateZ="80">
-            <h5 className="text-base text-g ml-1 md:text-xl group-hover:-translate-y-10 hidden group-hover:block">
+            <h5 className="text-base text-g ml-1 md:text-xl group-hover:-translate-y-16 hidden group-hover:block">
               {movie?.title || movie?.name}
             </h5>
           </CardItem>
           <CardItem translateZ="50">
-            <h6 className="text-sm ml-1 md:text-base group-hover:-translate-y-10 hidden group-hover:block">
+            <h6 className="text-sm ml-1 md:text-base group-hover:-translate-y-16 hidden group-hover:block">
               {movie?.release_date || movie?.first_air_date}
             </h6>
           </CardItem>
           <CardItem translateZ="60">
-            <h3 className="m-1 text-base font-semibold items-center group-hover:-translate-y-10 hidden group-hover:flex">
+            <h3 className="m-1 text-base font-semibold items-center group-hover:-translate-y-16 hidden group-hover:flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
