@@ -20,26 +20,26 @@ export default function MovieCard({ movie, type }: Props) {
           <CardItem>
             <div className="w-36 h-56 md:w-52 md:h-80 transition duration-500 relative">
               <Image
-                className="transition-all duration-500 group-hover:transform group-hover:scale-125 p-0.5 group-hover:ring-1 ring-blue-200/80 object-cover object-center rounded-lg"
+                className="transition-all duration-500 group-hover:transform group-hover:scale-110 p-0.5 group-hover:ring-1 ring-blue-200/80 object-cover object-center rounded-lg"
                 src={`https://image.tmdb.org/t/p/w185${movie?.poster_path}`}
                 layout="fill"
                 alt={movie?.title || movie?.name}
               />
-              <div className="transition duration-500 group-hover:absolute group-hover:scale-125 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#130F2D] rounded-lg" />
+              <div className="transition duration-500 group-hover:absolute group-hover:scale-110 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#130F2D] rounded-lg" />
             </div>
           </CardItem>
-          <CardItem translateZ="70">
-            <h5 className="text-base ml-1 md:text-lg group-hover:-translate-y-16 hidden group-hover:block">
+          <CardItem translateZ="50">
+            <h5 className="text-base ml-1 md:text-lg group-hover:-translate-y-24 hidden group-hover:block">
               {movie?.title || movie?.name}
             </h5>
           </CardItem>
-          <CardItem translateZ="50">
-            <h6 className="text-sm ml-1 md:text-base group-hover:-translate-y-16 hidden group-hover:block">
+          <CardItem translateZ="30">
+            <h6 className="text-sm ml-1 md:text-base group-hover:-translate-y-24 hidden group-hover:block">
               {movie?.release_date || movie?.first_air_date}
             </h6>
           </CardItem>
-          <CardItem translateZ="40">
-            <h3 className="m-1 text-base font-semibold items-center group-hover:-translate-y-16 hidden group-hover:flex">
+          <CardItem translateZ="5">
+            <h3 className="m-1 text-base font-semibold items-center group-hover:-translate-y-24 hidden group-hover:flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
