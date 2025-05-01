@@ -67,7 +67,6 @@ export default function Show() {
     fetchDetails(type, id)
       .then((res) => {
         setData(res);
-        console.log(res);
         document.title = `${res?.title || res?.name} · HotPopTime`;
         const doc = document.querySelector('meta[name="description"]');
         doc?.setAttribute("content", data?.tagline);

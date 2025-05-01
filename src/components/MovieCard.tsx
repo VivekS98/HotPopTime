@@ -11,8 +11,8 @@ export default function MovieCard({ movie, type }: Props) {
   const router = useRouter();
 
   return (
-    <CardContainer className="group">
-      <CardBody className="z-0 transition-all delay-150 duration-500 group-hover:mx-12 md:group-hover:mx-14 my-4">
+    <CardContainer className="group relative z-10 hover:z-50">
+      <CardBody className="transition-all delay-150 duration-500 group-hover:mx-12 md:group-hover:mx-14 my-4">
         <div
           className="transition duration-300 cursor-pointer w-fit"
           onClick={() => router.push(`/info?type=${type}&id=${movie.id}`)}
@@ -20,16 +20,16 @@ export default function MovieCard({ movie, type }: Props) {
           <CardItem>
             <div className="w-36 h-56 md:w-52 md:h-80 transition duration-500 relative">
               <Image
-                className="transition-all duration-500 group-hover:transform group-hover:scale-150 p-0.5 group-hover:ring-1 ring-blue-200/80 object-cover object-center rounded-lg"
+                className="transition-all duration-500 group-hover:transform group-hover:scale-125 p-0.5 group-hover:ring-1 ring-blue-200/80 object-cover object-center rounded-lg"
                 src={`https://image.tmdb.org/t/p/w185${movie?.poster_path}`}
                 layout="fill"
                 alt={movie?.title || movie?.name}
               />
-              <div className="transition duration-500 group-hover:absolute group-hover:scale-150 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#130F2D] rounded-lg" />
+              <div className="transition duration-500 group-hover:absolute group-hover:scale-125 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#130F2D] rounded-lg" />
             </div>
           </CardItem>
-          <CardItem translateZ="80">
-            <h5 className="text-base text-g ml-1 md:text-xl group-hover:-translate-y-16 hidden group-hover:block">
+          <CardItem translateZ="70">
+            <h5 className="text-base ml-1 md:text-lg group-hover:-translate-y-16 hidden group-hover:block">
               {movie?.title || movie?.name}
             </h5>
           </CardItem>
@@ -38,7 +38,7 @@ export default function MovieCard({ movie, type }: Props) {
               {movie?.release_date || movie?.first_air_date}
             </h6>
           </CardItem>
-          <CardItem translateZ="60">
+          <CardItem translateZ="40">
             <h3 className="m-1 text-base font-semibold items-center group-hover:-translate-y-16 hidden group-hover:flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

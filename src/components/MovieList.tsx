@@ -13,8 +13,6 @@ interface Props {
 export default function MovieList({ list, type, genre, id }: Props) {
   const router = useRouter();
 
-  console.log(list);
-
   const handleClick = () => {
     if (genre === "similar") {
       router.push(`/list?type=${type}&genere=${genre}&id=${id}`);
@@ -24,7 +22,6 @@ export default function MovieList({ list, type, genre, id }: Props) {
   };
 
   if (list === undefined) {
-    console.log(list);
     return (
       <div className="md:ml-6 flex flex-row flex-nowrap bg-transparent overflow-auto transition-all duration-300">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((val) => (
@@ -38,11 +35,10 @@ export default function MovieList({ list, type, genre, id }: Props) {
   }
 
   return (
-    <div className="md:ml-6 flex flex-row flex-nowrap bg-transparent overflow-auto transition-all duration-300">
+    <div className="md:ml-6 flex flex-row flex-nowrap bg-transparent transition-all duration-300">
       {list?.map((movie, ind) => (
         <MovieCard key={`${movie?.title}/${ind}`} movie={movie} type={type} />
       ))}
-
       <div
         onClick={() => handleClick()}
         className="group flex justify-center items-center"
