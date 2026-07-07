@@ -13,102 +13,120 @@ export default function Pagination({ total }: Props) {
   const id = params.get("id") || "0";
   const type = params.get("type") || "movie";
 
-  const prev = Number(page) > 1;
-  const next = Number(page) < Number(total);
+  const hasPrev = page > 1;
+  const hasNext = page < total;
 
-  const prev4 = page - 4 < 1 ? "none" : "block";
-  const prev2 = page - 2 < 1 ? "none" : "";
-  const next2 = page + 2 > total ? "none" : "block";
-  const next4 = page + 4 > total ? "none" : "";
+  const buildHref = (p: number) =>
+    `/list?page=${p}&query=${query}&genere=${genere}&id=${id}&type=${type}`;
+
+  // Build page range
+  const pages: number[] = [];
+  const delta = 2;
+  for (
+    let i = Math.max(1, page - delta);
+    i <= Math.min(total, page + delta);
+    i++
+  ) {
+    pages.push(i);
+  }
+
+  const showLeftEllipsis = pages[0] > 2;
+  const showRightEllipsis = pages[pages.length - 1] < total - 1;
+  const showFirstPage = pages[0] > 1;
+  const showLastPage = pages[pages.length - 1] < total;
+
+  const btnBase =
+    "inline-flex items-center justify-center w-9 h-9 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gold/50";
 
   return (
-    <div className="flex flex-row flex-nowrap justify-center items-center">
-      <div
-        style={{
-          pointerEvents: prev ? "auto" : "none",
-          opacity: prev ? "1" : "0.5",
-        }}
+    <nav
+      aria-label="Pagination"
+      className="flex items-center justify-center gap-1.5 mt-10 mb-6 flex-wrap"
+    >
+      {/* Previous */}
+      <Link
+        href={hasPrev ? buildHref(page - 1) : "#"}
+        id="pagination-prev"
+        aria-label="Previous page"
+        aria-disabled={!hasPrev}
+        className={`${btnBase} gap-1 px-3 ${
+          hasPrev
+            ? "bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white"
+            : "opacity-30 pointer-events-none bg-white/3 border border-white/5 text-white/40"
+        }`}
       >
-        <Link
-          href={`/list?page=1&query=${query}&genere=${genere}&id=${id}&type=${type}`}
-          passHref
-        >
-          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
-            First
-          </button>
-        </Link>
-      </div>
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+        </svg>
+        <span className="hidden sm:inline text-xs">Prev</span>
+      </Link>
 
-      <div style={{ display: prev4 }}>
-        <Link
-          href={`/list?page=${
-            page - 2
-          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
-          passHref
-        >
-          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
-            {page - 2}
-          </button>
-        </Link>
-      </div>
+      {/* First page */}
+      {showFirstPage && (
+        <>
+          <Link
+            href={buildHref(1)}
+            id="pagination-page-1"
+            className={`${btnBase} bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white`}
+          >
+            1
+          </Link>
+          {showLeftEllipsis && (
+            <span className="text-white/30 text-sm px-1">…</span>
+          )}
+        </>
+      )}
 
-      <div style={{ display: prev2 }}>
+      {/* Page range */}
+      {pages.map((p) => (
         <Link
-          href={`/list?page=${
-            page - 1
-          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
-          passHref
+          key={p}
+          href={buildHref(p)}
+          id={`pagination-page-${p}`}
+          aria-current={p === page ? "page" : undefined}
+          className={`${btnBase} ${
+            p === page
+              ? "bg-gold text-bg-primary font-bold shadow-gold-sm scale-105 pointer-events-none"
+              : "bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/30 text-white hover:text-gold"
+          }`}
         >
-          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
-            {page - 1}
-          </button>
+          {p}
         </Link>
-      </div>
+      ))}
 
-      <button className="pointer-events-none bg-[gold] m-2 py-1 px-2 text-opposite text-base sm:text-lg font-semibold text-center rounded-full ">
-        {page}
-      </button>
+      {/* Last page */}
+      {showLastPage && (
+        <>
+          {showRightEllipsis && (
+            <span className="text-white/30 text-sm px-1">…</span>
+          )}
+          <Link
+            href={buildHref(total)}
+            id={`pagination-page-${total}`}
+            className={`${btnBase} bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white`}
+          >
+            {total}
+          </Link>
+        </>
+      )}
 
-      <div style={{ display: next2 }}>
-        <Link
-          href={`/list?page=${
-            page + 1
-          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
-          passHref
-        >
-          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
-            {page + 1}
-          </button>
-        </Link>
-      </div>
-      <div style={{ display: next4 }}>
-        <Link
-          href={`/list?page=${
-            page + 2
-          }&query=${query}&genere=${genere}&id=${id}&type=${type}`}
-          passHref
-        >
-          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg font-semibold  text-center rounded-full transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
-            {page + 2}
-          </button>
-        </Link>
-      </div>
-
-      <div
-        style={{
-          pointerEvents: next ? "auto" : "none",
-          opacity: next ? "1" : "0.5",
-        }}
+      {/* Next */}
+      <Link
+        href={hasNext ? buildHref(page + 1) : "#"}
+        id="pagination-next"
+        aria-label="Next page"
+        aria-disabled={!hasNext}
+        className={`${btnBase} gap-1 px-3 ${
+          hasNext
+            ? "bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white"
+            : "opacity-30 pointer-events-none bg-white/3 border border-white/5 text-white/40"
+        }`}
       >
-        <Link
-          href={`/list?page=${total}&query=${query}&genere=${genere}&id=${id}&type=${type}`}
-          passHref
-        >
-          <button className="m-1 sm:m-4 py-1 px-2  text-white text-base sm:text-lg sm:py-2 sm:px-4 font-semibold  text-center rounded-lg transition-gpu duration-200 ease-in cursor-pointer ring-yellow-500 hover:bg-[gold] hover:text-black hover:ring-2 active:bg-yellow-500 active:text-black">
-            Last
-          </button>
-        </Link>
-      </div>
-    </div>
+        <span className="hidden sm:inline text-xs">Next</span>
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+        </svg>
+      </Link>
+    </nav>
   );
 }

@@ -37,3 +37,29 @@ export async function searchQuery(type = "movie", string: string, page = 1) {
     `search/${type}?api_key=0de978b80925eb0e40210d8773fb3375&query=${string}&page=${page}&include_adult=true`
   );
 }
+
+export async function fetchCredits(type = "movie", id: string) {
+  return await apiCall(
+    `${type}/${id}/credits?api_key=0de978b80925eb0e40210d8773fb3375`
+  );
+}
+
+export async function fetchVideos(type = "movie", id: string) {
+  return await apiCall(
+    `${type}/${id}/videos?api_key=0de978b80925eb0e40210d8773fb3375`
+  );
+}
+
+export async function discoverList(
+  type = "movie",
+  genreId?: string,
+  sortBy = "popularity.desc",
+  page = 1
+) {
+  let path = `discover/${type}?api_key=0de978b80925eb0e40210d8773fb3375&sort_by=${sortBy}&page=${page}&include_adult=true`;
+  if (genreId && genreId !== "all" && genreId !== "0") {
+    path += `&with_genres=${genreId}`;
+  }
+  return await apiCall(path);
+}
+
